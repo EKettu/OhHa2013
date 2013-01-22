@@ -1,4 +1,7 @@
 Tuntikirjanpito
 
 
-15.1.2013:  noin 3h (taistelua Gitin kanssa plus AihemŠŠrittelyn  laatiminen)
+15.1.2013: noin 3h (taistelua Gitin kanssa plus AihemŠŠrittelyn  laatiminen)
+17.1.2013: noin 2h ohjelman suunnittelua ja koodauksen aloitusta, noin 2h pajaa
+19.1.2013: noin 2h ohjelmointia (NimiVisa-luokka)
+21.1.2013: noin 2h ohjelmointia pajalla
