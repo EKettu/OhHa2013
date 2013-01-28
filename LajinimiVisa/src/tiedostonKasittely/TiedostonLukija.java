@@ -11,6 +11,7 @@ public class TiedostonLukija {
 
     private File nimiTiedosto;
     private int rivimaara;
+ //   String [] osat;
     
     private Elio elio;
     
@@ -23,6 +24,7 @@ public class TiedostonLukija {
 
     public TiedostonLukija(File nimiTiedosto) {
         this.nimiTiedosto = nimiTiedosto;
+        
         elio = new Elio ("", "");
         
         elioidenNimet = new HashMap<Integer, Elio>();
@@ -60,6 +62,11 @@ public class TiedostonLukija {
         }
 
     }
+    
+//    public String[] getTiedostonOsat() {
+//        return osat;
+//        
+//    }
     
     public Map<Integer, Elio> getElioidenNimet() {
         return elioidenNimet;

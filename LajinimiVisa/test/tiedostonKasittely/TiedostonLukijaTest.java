@@ -15,59 +15,50 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-
 public class TiedostonLukijaTest {
+
+    private TiedostonLukija lukija;
+    private Elio elio;
+    private File tiedosto;
     
-    TiedostonLukija lukija;
-    Elio elio;
-    File tiedosto;
-  //  Scanner tiedostonLukija;
-    
+
     public TiedostonLukijaTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() throws FileNotFoundException {
         tiedosto = new File("sienet.txt");
-     //   tiedostonLukija = new Scanner(tiedosto);
         lukija = new TiedostonLukija(tiedosto);
-         elio = new Elio("", "");
+        elio = new Elio("", "");
     }
-    
+
     @After
     public void tearDown() {
     }
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-     @Test
-     public void tiedostonLukijaLuoElionJaSuomiNimiOikein() {
-         
-         lukija.jaaRivitOsiin();
-         elio = lukija.getElioidenNimet().get(0);
-         
-     
-         assertEquals(elio.getSuominimi(), lukija.getSuomiNimet().get(0));
-     
-     }
-     
-     
-          @Test
-     public void tiedostonLukijaLuoElionJaLattariOikein() {
-         
-         lukija.jaaRivitOsiin();
-         elio = lukija.getElioidenNimet().get(0);  
-         assertEquals(elio.getLattari(), lukija.getLatinaNimet().get(0));
-     
-     }
-          
-          
+
+    @Test
+    public void tiedostonLukijaLuoElionJaSuomiNimiOikein() {
+
+        lukija.jaaRivitOsiin();
+        elio = lukija.getElioidenNimet().get(0);
+        assertEquals(elio.getSuominimi(), lukija.getSuomiNimet().get(0));
+
+    }
+
+    @Test
+    public void tiedostonLukijaLuoElionJaLattariOikein() {
+
+        lukija.jaaRivitOsiin();
+        elio = lukija.getElioidenNimet().get(0);
+        assertEquals(elio.getLattari(), lukija.getLatinaNimet().get(0));
+
+    }
 }

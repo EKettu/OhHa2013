@@ -13,37 +13,41 @@ import static org.junit.Assert.*;
 import java.util.*;
 
 public class TiedostonValintaTest {
-    
-    TiedostonValinta valinta;
-    
-    
+
+    private TiedostonValinta valinta;
+
     public TiedostonValintaTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
         valinta = new TiedostonValinta();
-        
+
     }
-    
+
     @After
     public void tearDown() {
     }
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-//     @Test
-//     public void josTiedostoaEiLoydyTulostaaOikein() {
-//         
-//       
-//     
-//     }
+
+    @Test
+    public void josTiedostoaEiLoydyAntaaOikeanMerkkijonon() {
+        String valittu = "x";
+        valinta.valinnanSelvitys(valittu);
+        assertEquals("Tiedostoa ei löydy", valinta.getValittu());
+    }
+
+    @Test
+    public void josTiedostoLoytyyAntaaOikeanTiedoston() {
+        String valittu = "s";
+        valinta.valinnanSelvitys(valittu);
+        assertEquals("sienet.txt", valinta.getValittu());
+    }
 }

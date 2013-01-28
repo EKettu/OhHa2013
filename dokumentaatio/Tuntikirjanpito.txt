@@ -6,3 +6,8 @@ Tuntikirjanpito
 19.1.2013: noin 2h ohjelmointia (NimiVisa-luokka)
 21.1.2013: noin 2h ohjelmointia pajalla
 22.1.2013: noin 1,5h ohjelmointia pajalla (9 testiä) ja noin 0,5h luokkakaavion tekoa
+24.1.2013: noin 1,5h ohjelmointia
+25.1.2013: noin 1 h ohjelmointia
+26.1.2013: noin 1,5h ohjelmointia (NimiHallinto-luokka vanhan NimiVisa-luokan tilalle ja uusi NimiVisa-luokka)
+27.1.2013: noin 1,5h ohjelmointia (miten saadaan ohjelma valitsemaan arvottavat lajit "samansukuisten" tai tarpeeksi samanlaisten nimien listasta)
+28.1.2013: 2h ohjelmointia pajalla ja noin 1,5 testien kirjoitusta muuten

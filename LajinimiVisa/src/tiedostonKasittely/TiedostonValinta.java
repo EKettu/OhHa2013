@@ -4,38 +4,57 @@
  */
 package tiedostonKasittely;
 
-import java.util.Scanner;
-import nimivisa.NimiVisa;
-
+import nimivisa.NimienHallinta;
 
 public class TiedostonValinta {
-    
-    private Scanner lukija;  
+
     private String valittu;
+    private boolean lopetustaEiValittu;
 
     public TiedostonValinta() {
-     
-        this.lukija = new Scanner(System.in);
         valittu = "";
+        lopetustaEiValittu = true;
     }
 
-    public void valinnanSelvitys() {
-        String valinta = lukija.nextLine();
+    public void valinnanSelvitys(String valinta) {
 
-        if (valinta.equals("e")||valinta.equals("k")) {
-            System.out.println("Tiedostoa ei löydy");
-        } else if (valinta.equals("s")) {        
-            valittu = "sienet.txt";
-            
+        if (!valinta.equalsIgnoreCase("x")) {
+
+            if (valinta.equals("e")) {
+                valittu = getElainTiedosto();
+            } else if (valinta.equals("k")) {
+                valittu = getKasviTiedosto();
+
+            } else if (valinta.equals("s")) {
+                valittu = getSieniTiedosto();
+            }
         } else {
-            System.out.println("Lopetus");
+           lopetustaEiValittu = false;        
         }
-        
+
     }
     
+    public boolean getLopetustaEiValittu() {
+        return lopetustaEiValittu;
+    }
+
     public String getValittu() {
         return valittu;
     }
-}
-    
 
+    public String getSieniTiedosto() {
+        return "sienet.txt";
+    }
+
+    public String getElainTiedosto() {
+        return "linnut.txt";
+    }
+
+    public String getKasviTiedosto() {
+        return "kasvit.txt";
+    }
+    
+    public String getLopetus() {
+        return "Lopetus";
+    }
+}
