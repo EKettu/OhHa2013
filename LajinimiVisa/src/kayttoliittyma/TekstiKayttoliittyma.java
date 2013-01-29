@@ -27,6 +27,8 @@ public class TekstiKayttoliittyma {
 
         lukija = new Scanner(System.in);
         onkoLopetusValittu = false;
+//                       hallinta = new NimienHallinta(valinta.getValittu());
+//        visa = new NimiVisa(hallinta);
 
     }
 
@@ -34,23 +36,26 @@ public class TekstiKayttoliittyma {
         tulostaAloitus();
         tiedostonValinta();
         
+        
         if (onkoLopetusValittu==true) {
             System.out.println("Lopetus");
+          
         }
         else {
-        hallinta = new NimienHallinta(valinta.getValittu());
+        hallinta = new NimienHallinta(valinta.getValittu()); //ongelma, nyt kysyy vain yhtä samaa lajia...
         visa = new NimiVisa(hallinta);
         System.out.println("Visa alkaa!" + "\n");
         uusiVisaKayntiin();
         jatketaankoVisaa();
         }
+        
 
     }
 
     public void uusiVisaKayntiin() {
-       
 
-        visa.kaynnistaVisa();
+           
+        visa.kaynnistaVisa(); //tämä saattaa olla ongelman syy, tätä pitäisi saada kutsuttua ehkä jossain muualla?
         System.out.println(hallinta.getKysyttavanLajinSuomiNimi());
         System.out.println("");
         System.out.println(hallinta.getKaikkiVaihtoehdot());

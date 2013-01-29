@@ -38,7 +38,7 @@ public class NimiVisaTest {
     }
 
     @Test
-    public void metodiValittiinkoOikeaVaihtoehtoPalauttaaFalseJosVaaraKirjainSyote() {
+    public void metodiValittiinkoOikeaVaihtoehtoPalauttaaFalseJosVaaraKirjainSyote() { //heittää vällillä NulPointerExceptionin!!!!!
         visa.kaynnistaVisa();
         String valinta = "Ö";
         assertEquals(false, visa.valittiinkoOikeaVaihtoehto(valinta));
@@ -46,15 +46,15 @@ public class NimiVisaTest {
     }
 
     @Test
-    public void metodiValittiinkoOikeaVaihtoehtoPalauttaaTrueJosOikeaVaihtoehtoValittu() {
+    public void metodiValittiinkoOikeaVaihtoehtoPalauttaaTrueJosOikeaVaihtoehtoValittu() { //meneen välillä läpi ja välillä ei, syynä random?
         visa.kaynnistaVisa();
         String valinta = "A";
         String aLajiNimi = "Pla";
         String kysyttyLaji = "Pla";
 
-        if (valinta.equals("A") && aLajiNimi.equals(kysyttyLaji)) {
+       if (valinta.equals("A") && aLajiNimi.equals(kysyttyLaji)) {
             assertEquals(true, visa.valittiinkoOikeaVaihtoehto(valinta));
-        }
+       }
 
     }
 }

@@ -23,6 +23,7 @@ public class NimiVisa {
     public void kaynnistaVisa() {
         hallinta.kaynnistaNimienArvonta();
         kysytty = hallinta.getKysyttavaLaji();
+       
 
     }
 
