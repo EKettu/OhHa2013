@@ -9,56 +9,56 @@ import tiedostonKasittely.TiedostonValinta;
 
 public class NimienHallinta {
 
-    private TiedostonValinta valinta;
     private TiedostonLukija lukija;
     private Elio kysyttava;
     private Map<Integer, Elio> lajienNimet;
-    private Random arpoja;
     private List<String> arvottujenLajienLattarit;
     private List<String> vaihtoehdot;
-    private List<String> lattarienAlkuosat;
     private List<String> kaikkiLajienLattarit;
     private List<String> samanSukuiset;
     private List<String> samallaKirjaimellaAlkavat;
     private List<String> kysytytNimet;
+    private Arpoja arvonta;
 
     public NimienHallinta(String tiedostonNimi) {
 
         kysyttava = new Elio("", "");
-        arpoja = new Random();
-        valinta = new TiedostonValinta();
+        arvonta = new Arpoja();
+
         lukija = new TiedostonLukija(new File(tiedostonNimi));
         lukija.jaaRivitOsiin();
         lajienNimet = lukija.getElioidenNimet();
-        arvottujenLajienLattarit = new ArrayList<String>();
-        vaihtoehdot = new ArrayList<String>();
-        lattarienAlkuosat = new ArrayList<String>();
         kaikkiLajienLattarit = lukija.getLatinaNimet();
 
         samanSukuiset = new ArrayList<String>();
-
+        arvottujenLajienLattarit = new ArrayList<String>();
         samallaKirjaimellaAlkavat = new ArrayList<String>();
-
+        vaihtoehdot = new ArrayList<String>();
         kysytytNimet = new ArrayList<String>();
 
     }
 
     public void kaynnistaNimienArvonta() {
-        
+
         arvoKysyttavaLaji();
-        lisataanSamanSukuisetOmaanListaan();
-        lisataanSamallaKirjaimellaAlkavatSuvutListaan();
+        lisataanSamanSukuisetOmaanListaan(getKysyttavaLaji());
+        lisataanSamallaKirjaimellaAlkavatSuvutListaan(getKysyttavaLaji());
         arvoMuutKolmeLajia();
         arvoLattarienJarjestys();
 
     }
 
     public void arvoKysyttavaLaji() {
-        int arvottava = arpoja.nextInt(lajienNimet.size());
-        //    if (!kysytytNimet.contains(kysyttava.getSuominimi())) {
-        kysyttava = lajienNimet.get(arvottava);
-        //    }
+        int arvottava = arvonta.arvoLukuValilta(1, lajienNimet.size());
+        if (!kysytytNimet.contains(kysyttava.getSuominimi())) {
+            kysyttava = lajienNimet.get(arvottava);
+        }
         kysytytNimet.add(kysyttava.getSuominimi());
+      //  System.out.println(kysytytNimet.size());
+    }
+
+    public List<String> getKysytytNimetLista() {
+        return kysytytNimet;
     }
 
     public Elio getKysyttavaLaji() {
@@ -68,16 +68,16 @@ public class NimienHallinta {
     public String getKysyttavanLajinSuomiNimi() {
         return kysyttava.getSuominimi();
     }
-    
+
     public String getKysyttavanLajinLattari() {
         return kysyttava.getLattari();
     }
 
-    public void lisataanSamanSukuisetOmaanListaan() {
+    public void lisataanSamanSukuisetOmaanListaan(Elio kysyttavaElio) {
         List<String> kaikkiLattarit = lukija.getLatinaNimet();
-        kaikkiLattarit.remove(kysyttava.getLattari());
+        kaikkiLattarit.remove(kysyttavaElio.getLattari());
         for (String samaSuku : kaikkiLattarit) {
-            if (samaSuku.startsWith(kysyttava.getLattarinNeljaEkaaKirjainta())) {
+            if (samaSuku.startsWith(kysyttavaElio.getLattarinNeljaEkaaKirjainta())) {
                 samanSukuiset.add(samaSuku);
             }
         }
@@ -88,17 +88,18 @@ public class NimienHallinta {
     }
 
     public boolean onkoSamanSukuisiaVahintaanKolme() {
+
         if (samanSukuiset.size() >= 3) {
             return true;
         }
         return false;
     }
 
-    public void lisataanSamallaKirjaimellaAlkavatSuvutListaan() {
+    public void lisataanSamallaKirjaimellaAlkavatSuvutListaan(Elio kysyttavaElio) {
         List<String> kaikkiLattarit = lukija.getLatinaNimet();
-        kaikkiLattarit.remove(kysyttava.getLattari());
+        kaikkiLattarit.remove(kysyttavaElio.getLattari());
         for (String samaKirjain : kaikkiLattarit) {
-            if (samaKirjain.startsWith(kysyttava.getLattarinEkaKirjain())) {
+            if (samaKirjain.startsWith(kysyttavaElio.getLattarinEkaKirjain())) {
                 samallaKirjaimellaAlkavat.add(samaKirjain);
             }
         }
@@ -127,7 +128,6 @@ public class NimienHallinta {
 //        }
 //        return true;
 //    }
-
     public boolean onkoSamallaKirjaimellaAlkaviaSukuja() {
         List<String> kaikkiLattarit = lukija.getLatinaNimet();
         kaikkiLattarit.remove(kysyttava.getLattari());
@@ -154,7 +154,8 @@ public class NimienHallinta {
     public void arvoMuutKolmeLajia() {
 
         while (arvottujenLajienLattarit.size() < 3) {
-            int arvottava = arpoja.nextInt(getListaJostaLattaritArvotaan().size());
+            int arvottava = arvonta.arvoLukuValilta(0, getListaJostaLattaritArvotaan().size());
+            //   int arvottava = arpoja.nextInt(getListaJostaLattaritArvotaan().size());
             String arvottuLattari = getListaJostaLattaritArvotaan().get(arvottava);
 
             if (arvottuLattari.equals(kysyttava.getLattari()) || arvottujenLajienLattarit.contains(arvottuLattari)) {
@@ -163,7 +164,7 @@ public class NimienHallinta {
                 arvottujenLajienLattarit.add(arvottuLattari);
             }
         }
-        //    System.out.println(lajienLattarit);
+
     }
 
     public int getLajienLattaritListanPituus() {
@@ -177,10 +178,7 @@ public class NimienHallinta {
         for (String lattari : arvottujenLajienLattarit) {
             vaihtoehdot.add(lattari);
         }
-
         Collections.shuffle(vaihtoehdot);
-        //    System.out.println(lajienLattarit);
-
 
     }
 

@@ -17,8 +17,8 @@ public class TiedostonLukija {
     
     private Map<Integer, Elio> elioidenNimet;
     
-    private Map<String, String> nimetSuomiLatina;
-    private Map<String, String> nimetLatinaSuomi;
+//    private Map<String, String> nimetSuomiLatina;
+//    private Map<String, String> nimetLatinaSuomi;
     private List<String> suomiNimet;
     private List<String> latinaNimet;
 
@@ -29,8 +29,8 @@ public class TiedostonLukija {
         
         elioidenNimet = new HashMap<Integer, Elio>();
         
-        nimetSuomiLatina = new HashMap<String, String>();
-        nimetLatinaSuomi = new HashMap<String, String>();
+//        nimetSuomiLatina = new HashMap<String, String>();
+//        nimetLatinaSuomi = new HashMap<String, String>();
         suomiNimet = new ArrayList<String>();
         latinaNimet = new ArrayList<String>();
         rivimaara = 0;
@@ -47,13 +47,13 @@ public class TiedostonLukija {
         while (tiedostonLukija.hasNextLine()) {
            
             String rivi = tiedostonLukija.nextLine();
-            String[] osat = rivi.split(":");
+            String[] osat = rivi.split(":"); //muuta booleaniksi ja tarkista, että onko haluttu tiedosto oikeassa muodossa
             
             elio = new Elio(osat[0], osat[1]);
             elioidenNimet.put(rivimaara, elio);
             
-            nimetSuomiLatina.put(osat[0], osat[1]);
-            nimetLatinaSuomi.put(osat[1], osat[0]);
+//            nimetSuomiLatina.put(osat[0], osat[1]);
+//            nimetLatinaSuomi.put(osat[1], osat[0]);
             
             suomiNimet.add(osat[0]);
             latinaNimet.add(osat[1]);
@@ -63,24 +63,20 @@ public class TiedostonLukija {
 
     }
     
-//    public String[] getTiedostonOsat() {
-//        return osat;
-//        
-//    }
     
     public Map<Integer, Elio> getElioidenNimet() {
         return elioidenNimet;
     }
 
-    public Map<String, String> getNimetSuomiLatina() {
-        return nimetSuomiLatina;
-
-    }
-
-    public Map<String, String> getNimetLatinaSuomi() {
-        return nimetLatinaSuomi;
-
-    }
+//    public Map<String, String> getNimetSuomiLatina() {
+//        return nimetSuomiLatina;
+//
+//    }
+//
+//    public Map<String, String> getNimetLatinaSuomi() {
+//        return nimetLatinaSuomi;
+//
+//    }
 
     public List<String> getSuomiNimet() {
         return suomiNimet;

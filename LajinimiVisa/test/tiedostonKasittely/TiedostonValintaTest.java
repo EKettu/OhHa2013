@@ -38,16 +38,16 @@ public class TiedostonValintaTest {
     }
 
     @Test
-    public void josTiedostoaEiLoydyAntaaOikeanMerkkijonon() {
-        String valittu = "x";
-        valinta.valinnanSelvitys(valittu);
-        assertEquals("Tiedostoa ei löydy", valinta.getValittu());
+    public void josTiedostoaEiLoydyPalauttaaFalse() {
+        String valittu = "jotainihanrandomia";
+       
+        assertEquals(false, valinta.valinnanSelvitys(valittu));
     }
 
     @Test
-    public void josTiedostoLoytyyAntaaOikeanTiedoston() {
-        String valittu = "s";
-        valinta.valinnanSelvitys(valittu);
-        assertEquals("sienet.txt", valinta.getValittu());
+    public void josTiedostoLoytyyPalauttaaTrue() {
+        String valittu = "testiSienet.txt";
+       
+        assertEquals(true, valinta.valinnanSelvitys(valittu));
     }
 }

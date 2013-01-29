@@ -33,11 +33,13 @@ public class TekstiKayttoliittyma {
     public void kaynnista() {
         tulostaAloitus();
         tiedostonValinta();
+        
         if (onkoLopetusValittu==true) {
             System.out.println("Lopetus");
-          //  valinta.valinnanSelvitys("x");
         }
         else {
+        hallinta = new NimienHallinta(valinta.getValittu());
+        visa = new NimiVisa(hallinta);
         System.out.println("Visa alkaa!" + "\n");
         uusiVisaKayntiin();
         jatketaankoVisaa();
@@ -46,8 +48,7 @@ public class TekstiKayttoliittyma {
     }
 
     public void uusiVisaKayntiin() {
-        hallinta = new NimienHallinta(valinta.getValittu());
-        visa = new NimiVisa(hallinta);
+       
 
         visa.kaynnistaVisa();
         System.out.println(hallinta.getKysyttavanLajinSuomiNimi());
@@ -60,28 +61,22 @@ public class TekstiKayttoliittyma {
     }
 
     public void tulostaAloitus() {
-        System.out.println("Valitse eliöryhmä");
-        System.out.println("Eläimet: e");
-        System.out.println("Kasvit: k");
-        System.out.println("Sienet: s");
-        System.out.println("Lopetus: x");
+        System.out.println("Kirjoita haluamasi tiedoston nimi. X lopettaa");
+
     }
 
     public void tiedostonValinta() {
         String valittu = lukija.nextLine();
-
-        if (valittu.equals("e")) {
-            valinta.valinnanSelvitys("e");
-        } else if (valittu.equals("k")) {
-            valinta.valinnanSelvitys("k");
-        } else if (valittu.equals("s")) {
-            valinta.valinnanSelvitys("s");
-        } else if (valittu.equals("x")) {
-           onkoLopetusValittu = true;
+        
+        if (valittu.equalsIgnoreCase("X")) {
+             onkoLopetusValittu = true;
+            
         }
         else {
+            if (!valinta.valinnanSelvitys(valittu)) {
             System.out.println("Virheellinen syöte! Anna oikea kirjain.");
             tiedostonValinta();
+            }
         }
 
     }
@@ -114,6 +109,7 @@ public class TekstiKayttoliittyma {
             jatketaankoVisaa();
         } else if (jatkuuko.equalsIgnoreCase("e")) {
             System.out.println("Näkemiin!");
+            System.out.println("Lajeja kysyttiin " +hallinta.getKysytytNimetLista().size());
         
         } else {
             System.out.println("Virheellinen syöte!");

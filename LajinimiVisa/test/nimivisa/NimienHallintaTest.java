@@ -21,7 +21,7 @@ import tiedostonKasittely.TiedostonLukija;
 public class NimienHallintaTest {
 
     private NimienHallinta hallinta;
-    private TiedostonLukija lukija;
+
 
     public NimienHallintaTest() {
     }
@@ -37,15 +37,12 @@ public class NimienHallintaTest {
     @Before
     public void setUp() {
         hallinta = new NimienHallinta("testiSienet.txt");
-        File tiedosto = new File("testiSienet.txt");
-        lukija = new TiedostonLukija(tiedosto);
-        
+
     }
 
     @After
     public void tearDown() {
     }
-
 
     @Test
     public void arvotaanTasanKolmeMuutaLajia() {
@@ -76,7 +73,6 @@ public class NimienHallintaTest {
         hallinta.arvoMuutKolmeLajia();
         hallinta.arvoLattarienJarjestys();
 
-
         assertEquals(lajienLattarit, hallinta.getLajienLattarit());
     }
 
@@ -87,7 +83,7 @@ public class NimienHallintaTest {
         hallinta.arvoLattarienJarjestys();
         List<String> vaihtoehdot = hallinta.getVaihtoehdot();
 
-        assertThat(lajienLattarit, not(vaihtoehdot));
+        assertThat(lajienLattarit, not(vaihtoehdot)); //tässä pieni ongelma, välillä näet menee satunnaisesti sufflessa ihan samaan järjestykseen, mutta siis se kai ok?
     }
 
     @Test
@@ -112,68 +108,74 @@ public class NimienHallintaTest {
         assertTrue(vaihtoehdot.contains(kysytynLattari));
 
     }
-    
-        @Test
-    public void lisataanSamallaKirjaimellaAlkavatSuvutListaanToimiiJosEiSukunsaAinoa() {
-            lukija.jaaRivitOsiin();
-            List<String> samallaKirjaimellaAlkavat = new ArrayList<String>();
-            Elio kysyttyLaji = new Elio ("seitikki sp", "Cortinarius mucosus");
-        List <String> kaikkiLattarit = lukija.getLatinaNimet();
-        kaikkiLattarit.remove(kysyttyLaji.getLattari());
-        for (String samaKirjain : kaikkiLattarit) {
-            if (samaKirjain.startsWith(kysyttyLaji.getLattarinEkaKirjain())) {
-                samallaKirjaimellaAlkavat.add(samaKirjain);
-            }
-        }
-        
-        assertEquals(8, samallaKirjaimellaAlkavat.size());
-    }
-        
-                @Test
-    public void eiLisataSamallaKirjaimellaAlkavienSukujenListaanJosSukunsaAinoa() {
-            lukija.jaaRivitOsiin();
-            List<String> samallaKirjaimellaAlkavat = new ArrayList<String>();
-            Elio kysyttyLaji = new Elio ("isorusokas", "Entoloma sinuatum");
-        List <String> kaikkiLattarit = lukija.getLatinaNimet();
-        kaikkiLattarit.remove(kysyttyLaji.getLattari());
-        for (String samaKirjain : kaikkiLattarit) {
-            if (samaKirjain.startsWith(kysyttyLaji.getLattarinEkaKirjain())) {
-                samallaKirjaimellaAlkavat.add(samaKirjain);
-            }
-        }        
-        assertEquals(0, samallaKirjaimellaAlkavat.size());
-    }
-       
-        
-                        @Test
+
+    @Test
     public void lisataanSamaaSukuaOlevatListaanToimiiJosEiSukunsaAinoa() {
-            lukija.jaaRivitOsiin();
-            List<String> samanSukuiset = new ArrayList<String>();
-            Elio kysyttyLaji = new Elio ("seitikki sp", "Cortinarius mucosus");
-        List <String> kaikkiLattarit = lukija.getLatinaNimet();
-        kaikkiLattarit.remove(kysyttyLaji.getLattari());
-        for (String samaaSukua : kaikkiLattarit) {
-            if (samaaSukua.startsWith(kysyttyLaji.getLattarinNeljaEkaaKirjainta())) {
-                samanSukuiset.add(samaaSukua);
-            }
-        }       
-        assertEquals(4, samanSukuiset.size());
-    }
-                        
-                                
-                        @Test
-    public void eiLisataSamaaSukuaOleviaListaanJosSukunsaAinoa() {
-            lukija.jaaRivitOsiin();
-            List<String> samanSukuiset = new ArrayList<String>();
-            Elio kysyttyLaji = new Elio ("isorusokas", "Entoloma sinuatum");
-        List <String> kaikkiLattarit = lukija.getLatinaNimet();
-        kaikkiLattarit.remove(kysyttyLaji.getLattari());
-        for (String samaaSukua : kaikkiLattarit) {
-            if (samaaSukua.startsWith(kysyttyLaji.getLattarinNeljaEkaaKirjainta())) {
-                samanSukuiset.add(samaaSukua);
-            }
-        }       
-        assertEquals(0, samanSukuiset.size());
+
+        Elio kysyttyLaji = new Elio("seitikki sp", "Cortinarius mucosus");
+        hallinta.lisataanSamanSukuisetOmaanListaan(kysyttyLaji);
+
+        assertEquals(4, hallinta.getSamanSukuiset().size());
     }
 
+    @Test
+    public void eiLisataSamaaSukuaOleviaListaanJosSukunsaAinoa() {
+
+        Elio kysyttyLaji = new Elio("isorusokas", "Entoloma sinuatum");
+        hallinta.lisataanSamanSukuisetOmaanListaan(kysyttyLaji);
+
+        assertEquals(0, hallinta.getSamanSukuiset().size());
+    }
+
+    @Test
+    public void lisataanSamallaKirjaimellaAlkavatListaanToimiiJosEiSukunsaAinoa() {
+
+        Elio kysyttyLaji = new Elio("seitikki sp", "Cortinarius mucosus");
+        hallinta.lisataanSamallaKirjaimellaAlkavatSuvutListaan(kysyttyLaji);
+
+        assertEquals(8, hallinta.getSamallaKirjaimellaAlkavat().size());
+    }
+
+    @Test
+    public void eiLisataSamallaKirjaimellaAlkaviaListaanJosSukunsaAinoa() {
+
+        Elio kysyttyLaji = new Elio("isorusokas", "Entoloma sinuatum");
+        hallinta.lisataanSamallaKirjaimellaAlkavatSuvutListaan(kysyttyLaji);
+
+        assertEquals(0, hallinta.getSamallaKirjaimellaAlkavat().size());
+    }
+
+    @Test
+    public void onkoSamanSukuisiaVahintaanKolmePalauttaaTrueOikein() {
+        Elio kysyttyLaji = new Elio("seitikki sp", "Cortinarius mucosus");
+        hallinta.lisataanSamanSukuisetOmaanListaan(kysyttyLaji);
+
+        assertEquals(true, hallinta.onkoSamanSukuisiaVahintaanKolme());
+    }
+
+    @Test
+    public void onkoSamanSukuisiaVahintaanKolmePalauttaaFalseOikein() {
+        Elio kysyttyLaji = new Elio("isorusokas", "Entoloma sinuatum");
+        hallinta.lisataanSamanSukuisetOmaanListaan(kysyttyLaji);
+
+        assertEquals(false, hallinta.onkoSamanSukuisiaVahintaanKolme());
+    }
+
+    @Test
+    public void onkoSamallaKirjaimellaAlkaviaVahintaanKolmePalauttaaTrueOikein() {
+        Elio kysyttyLaji = new Elio("seitikki sp", "Cortinarius mucosus");
+        hallinta.lisataanSamallaKirjaimellaAlkavatSuvutListaan(kysyttyLaji);
+
+        assertEquals(true, hallinta.onkoSamallaKirjaimellaAlkaviaVahintaanKolme());
+    }
+    
+    
+    
+        @Test
+    public void onkoSamallaKirjaimellaAlkaviaVahintaanKolmePalauttaaFalseOikein() {
+        Elio kysyttyLaji = new Elio("isorusokas", "Entoloma sinuatum");
+        hallinta.lisataanSamallaKirjaimellaAlkavatSuvutListaan(kysyttyLaji);
+        assertEquals(false, hallinta.onkoSamallaKirjaimellaAlkaviaVahintaanKolme());
+    }
 }
+

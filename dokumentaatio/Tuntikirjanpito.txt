@@ -11,3 +11,4 @@ Tuntikirjanpito
 26.1.2013: noin 1,5h ohjelmointia (NimiHallinto-luokka vanhan NimiVisa-luokan tilalle ja uusi NimiVisa-luokka)
 27.1.2013: noin 1,5h ohjelmointia (miten saadaan ohjelma valitsemaan arvottavat lajit "samansukuisten" tai tarpeeksi samanlaisten nimien listasta)
 28.1.2013: 2h ohjelmointia pajalla ja noin 1,5 testien kirjoitusta muuten
+29.1.2013: 2h ohjelmointia pajalla (uusi luokka Arpoja), testejä, noin 1h ohjelmointia kotona
