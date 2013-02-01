@@ -20,14 +20,16 @@ public class TekstiKayttoliittyma {
     private String valittuTiedosto;
     private String valittuVaihtoehto;
     private boolean onkoLopetusValittu;
+    private boolean jatketaankoVisaa;
     
 
     public TekstiKayttoliittyma(TiedostonValinta valinta) {
         this.valinta = valinta;
+        jatketaankoVisaa = true;
 
         lukija = new Scanner(System.in);
         onkoLopetusValittu = false;
-//                       hallinta = new NimienHallinta(valinta.getValittu());
+//        hallinta = new NimienHallinta(valinta.getValittu());
 //        visa = new NimiVisa(hallinta);
 
     }
@@ -35,33 +37,40 @@ public class TekstiKayttoliittyma {
     public void kaynnista() {
         tulostaAloitus();
         tiedostonValinta();
-        
-        
+        hallinta = new NimienHallinta(valinta.getValittu()); //ongelma, nyt kysyy vain yhtä samaa lajia...
+        visa = new NimiVisa(hallinta);  
+      
+   
         if (onkoLopetusValittu==true) {
             System.out.println("Lopetus");
-          
+    
         }
         else {
-        hallinta = new NimienHallinta(valinta.getValittu()); //ongelma, nyt kysyy vain yhtä samaa lajia...
-        visa = new NimiVisa(hallinta);
+//      hallinta = new NimienHallinta(valinta.getValittu()); //ongelma, nyt kysyy vain yhtä samaa lajia...
+//        visa = new NimiVisa(hallinta);
         System.out.println("Visa alkaa!" + "\n");
+        while (jatketaankoVisaa) { 
+ 
+          visa.arvoLajit();
         uusiVisaKayntiin();
         jatketaankoVisaa();
+         hallinta.tyhjennaLajiListat();
+       
+      //   visa.arvoLajit();
         }
-        
-
+        } 
+  
     }
 
     public void uusiVisaKayntiin() {
-
-           
-        visa.kaynnistaVisa(); //tämä saattaa olla ongelman syy, tätä pitäisi saada kutsuttua ehkä jossain muualla?
+    
+               
         System.out.println(hallinta.getKysyttavanLajinSuomiNimi());
         System.out.println("");
         System.out.println(hallinta.getKaikkiVaihtoehdot());
         System.out.println("");
         kysyValinta();
-
+        
 
     }
 
@@ -110,15 +119,20 @@ public class TekstiKayttoliittyma {
 
  
         if (jatkuuko.equalsIgnoreCase("k")) {
-            uusiVisaKayntiin();
-            jatketaankoVisaa();
+            visa.onkoVisaKaynnissa(jatketaankoVisaa);
+           
+       //     visa.arvoLajit();
+//            uusiVisaKayntiin();
+//            jatketaankoVisaa();
         } else if (jatkuuko.equalsIgnoreCase("e")) {
+            jatketaankoVisaa=false;
             System.out.println("Näkemiin!");
-            System.out.println("Lajeja kysyttiin " +hallinta.getKysytytNimetLista().size());
+            System.out.println("Oikeita vastauksia: " + visa.getOikeidenVastaustenLkm() + "/" +hallinta.getKysyttyjenLajienMaara()); //+hallinta.getKysytytNimetLista().size()
         
         } else {
             System.out.println("Virheellinen syöte!");
-            jatketaankoVisaa();
+            System.out.println("Haluatko jatkaa? k/e");
+            jatkuuko = lukija.nextLine();
         }
     }
 }

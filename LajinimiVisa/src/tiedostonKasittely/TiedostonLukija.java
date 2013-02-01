@@ -16,7 +16,7 @@ public class TiedostonLukija {
     private Elio elio;
     
     private Map<Integer, Elio> elioidenNimet;
-    
+    private List<Elio> tiedostonEliot;
 //    private Map<String, String> nimetSuomiLatina;
 //    private Map<String, String> nimetLatinaSuomi;
     private List<String> suomiNimet;
@@ -28,7 +28,7 @@ public class TiedostonLukija {
         elio = new Elio ("", "");
         
         elioidenNimet = new HashMap<Integer, Elio>();
-        
+        tiedostonEliot = new ArrayList<Elio>();
 //        nimetSuomiLatina = new HashMap<String, String>();
 //        nimetLatinaSuomi = new HashMap<String, String>();
         suomiNimet = new ArrayList<String>();
@@ -50,6 +50,7 @@ public class TiedostonLukija {
             String[] osat = rivi.split(":"); //muuta booleaniksi ja tarkista, että onko haluttu tiedosto oikeassa muodossa
             
             elio = new Elio(osat[0], osat[1]);
+            tiedostonEliot.add(elio);
             elioidenNimet.put(rivimaara, elio);
             
 //            nimetSuomiLatina.put(osat[0], osat[1]);
@@ -63,6 +64,9 @@ public class TiedostonLukija {
 
     }
     
+    public List<Elio> getTiedostonEliot() {
+        return tiedostonEliot;
+    }
     
     public Map<Integer, Elio> getElioidenNimet() {
         return elioidenNimet;

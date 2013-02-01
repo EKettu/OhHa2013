@@ -28,6 +28,11 @@ public class TiedostonValinta {
 
         return tiedosto.exists();
     }
+    
+    /**
+     * 
+     * @return valitun tiedoston
+     */
 
     public String getValittu() {
         return valittu;

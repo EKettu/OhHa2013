@@ -11,4 +11,6 @@ Tuntikirjanpito
 26.1.2013: noin 1,5h ohjelmointia (NimiHallinto-luokka vanhan NimiVisa-luokan tilalle ja uusi NimiVisa-luokka)
 27.1.2013: noin 1,5h ohjelmointia (miten saadaan ohjelma valitsemaan arvottavat lajit "samansukuisten" tai tarpeeksi samanlaisten nimien listasta)
 28.1.2013: 2h ohjelmointia pajalla ja noin 1,5 testien kirjoitusta muuten
-29.1.2013: 2h ohjelmointia pajalla (uusi luokka Arpoja), testejä, noin 1h ohjelmointia kotona
+29.1.2013: 2h ohjelmointia pajalla (uusi luokka Arpoja), testejä, noin 1h ohjelmointia kotona (ongelma nimien kyselyn kanssa, ohjelma kysyy vain yhtä ja samaa lajia, uuden kysyttävän lajin arpominen ei toimi)
+31.1.2013: noin 1h ohjelmointia pajalla (yrityksiä ratkoa eilistä ongelmaa). Noin 1,5h ohjelmointia kotona, uusi tapa hakea kysyttävä laji (kanssakurssilaisen vinkistä), nyt ongelmana enää vaihtoehdot-listan toiminta, kasvaa joka kierroksella ja sisältää samoja lajeja.
+1.2.2013: noin 1h ohjelmointia (vaihtoehdot-listan ongelma korjattu (ehkä ei kaikkien taiteen sääntöjen mukaan), nyt ongelmana enää se, että ohjelma poistaa jo kysyttyjen lajien lattarit listasta, josta pitäisi saada vaihtoehtoja uudelle oikealle lajille. 

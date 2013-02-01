@@ -13,11 +13,21 @@ public class Elio {
         this.suominimi = suominimi;
         this.lattari = lattari;
     }
+    
+    /**
+     * 
+     * @return eliön suomenkielinen nimi
+     */
 
     public String getSuominimi() {
         return suominimi;
     }
 
+    /**
+     * 
+     * @return eliön latinankielinen nimi
+     */
+    
     public String getLattari() {
         return lattari;
     }

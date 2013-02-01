@@ -7,6 +7,7 @@ import java.util.*;
 import kayttoliittyma.TekstiKayttoliittyma;
 import tiedostonKasittely.TiedostonValinta;
 
+
 public class NimienHallinta {
 
     private TiedostonLukija lukija;
@@ -19,7 +20,13 @@ public class NimienHallinta {
     private List<String> samallaKirjaimellaAlkavat;
     private List<String> kysytytNimet;
     private Arpoja arvonta;
-
+    private List<Elio> kysyttavatEliot;
+    private int kysyttyjenLajienMaara;
+    
+/**
+ * 
+ * @param tiedostonNimi 
+ */
     public NimienHallinta(String tiedostonNimi) {
 
         kysyttava = new Elio("", "");
@@ -34,32 +41,54 @@ public class NimienHallinta {
         arvottujenLajienLattarit = new ArrayList<String>();
         samallaKirjaimellaAlkavat = new ArrayList<String>();
         vaihtoehdot = new ArrayList<String>();
-        kysytytNimet = new ArrayList<String>();
+        kysytytNimet = new ArrayList<String>();      
+        kysyttavatEliot = lukija.getTiedostonEliot();
+       sekoitaKysyttavatLajitLista();
+        kysyttyjenLajienMaara=0;
 
     }
 
     public void kaynnistaNimienArvonta() {
-
-        arvoKysyttavaLaji();
+     hommaaKysyttavaLaji();
+        System.out.println(kysyttava.getSuominimi());
+    //   arvoKysyttavaLaji();
         lisataanSamanSukuisetOmaanListaan(getKysyttavaLaji());
         lisataanSamallaKirjaimellaAlkavatSuvutListaan(getKysyttavaLaji());
         arvoMuutKolmeLajia();
         arvoLattarienJarjestys();
+       // vaihtoehdot = new ArrayList<String>();
+      //  System.out.println(vaihtoehdot);
 
     }
 
-    public void arvoKysyttavaLaji() {
-        int arvottava = arvonta.arvoLukuValilta(1, lajienNimet.size());
-        if (!kysytytNimet.contains(kysyttava.getSuominimi())) {
-            kysyttava = lajienNimet.get(arvottava);
-        }
-        kysytytNimet.add(kysyttava.getSuominimi());
-      //  System.out.println(kysytytNimet.size());
+    public void sekoitaKysyttavatLajitLista() {
+        Collections.shuffle(kysyttavatEliot);
+        
     }
-
-    public List<String> getKysytytNimetLista() {
-        return kysytytNimet;
+    
+    public void hommaaKysyttavaLaji() {
+      
+        kysyttava = kysyttavatEliot.get(kysyttyjenLajienMaara);
+        kysyttyjenLajienMaara++;
     }
+    
+    public int getKysyttyjenLajienMaara() {
+        return kysyttyjenLajienMaara;
+    }
+            
+            
+//    public void arvoKysyttavaLaji() {
+//        int arvottava = arvonta.arvoLukuValilta(1, lajienNimet.size());
+//        if (!kysytytNimet.contains(kysyttava.getSuominimi())) {
+//            kysyttava = lajienNimet.get(arvottava);
+//        }
+//        kysytytNimet.add(kysyttava.getSuominimi());
+//       System.out.println(kysytytNimet);
+//    }
+//
+//    public List<String> getKysytytNimetLista() {
+//        return kysytytNimet;
+//    }
 
     public Elio getKysyttavaLaji() {
         return kysyttava;
@@ -75,12 +104,13 @@ public class NimienHallinta {
 
     public void lisataanSamanSukuisetOmaanListaan(Elio kysyttavaElio) {
         List<String> kaikkiLattarit = lukija.getLatinaNimet();
-        kaikkiLattarit.remove(kysyttavaElio.getLattari());
-        for (String samaSuku : kaikkiLattarit) {
+        kaikkiLattarit.remove(kysyttavaElio.getLattari());                  //Tähän pitäs varmaan tehdä jotain, että ei poistettaisi sitä kysyttyä lattaria miltään listalta
+        for (String samaSuku : kaikkiLattarit) {                            //Muuten näet jo kysytyt lajit eivät ainakaan päädy vaihtoehdot-listalle
             if (samaSuku.startsWith(kysyttavaElio.getLattarinNeljaEkaaKirjainta())) {
                 samanSukuiset.add(samaSuku);
             }
         }
+   //     kaikkiLattarit = lukija.getLatinaNimet();
     }
 
     public List<String> getSamanSukuiset() {
@@ -103,6 +133,7 @@ public class NimienHallinta {
                 samallaKirjaimellaAlkavat.add(samaKirjain);
             }
         }
+      //  kaikkiLattarit = lukija.getLatinaNimet();
     }
 
     public List<String> getSamallaKirjaimellaAlkavat() {
@@ -128,18 +159,18 @@ public class NimienHallinta {
 //        }
 //        return true;
 //    }
-    public boolean onkoSamallaKirjaimellaAlkaviaSukuja() {
-        List<String> kaikkiLattarit = lukija.getLatinaNimet();
-        kaikkiLattarit.remove(kysyttava.getLattari());
-
-        for (String lattari : kaikkiLattarit) {
-            if (!lattari.startsWith(kysyttava.getLattarinEkaKirjain())) {
-                return false;
-            }
-        }
-
-        return true;
-    }
+//    public boolean onkoSamallaKirjaimellaAlkaviaSukuja() {
+//        List<String> kaikkiLattarit = lukija.getLatinaNimet();
+//        kaikkiLattarit.remove(kysyttava.getLattari());
+//
+//        for (String lattari : kaikkiLattarit) {
+//            if (!lattari.startsWith(kysyttava.getLattarinEkaKirjain())) {
+//                return false;
+//            }
+//        }
+//        kaikkiLattarit = lukija.getLatinaNimet();
+//        return true;
+//    }
 
     public List<String> getListaJostaLattaritArvotaan() {
         if (onkoSamanSukuisiaVahintaanKolme()) {
@@ -179,8 +210,34 @@ public class NimienHallinta {
             vaihtoehdot.add(lattari);
         }
         Collections.shuffle(vaihtoehdot);
-
+        System.out.println(vaihtoehdot);
     }
+    
+    
+    public void tyhjennaLajiListat() {
+        samanSukuiset = new ArrayList<String>();
+        samallaKirjaimellaAlkavat = new ArrayList<String>();
+        arvottujenLajienLattarit = new ArrayList<String>();
+        vaihtoehdot= new ArrayList<String>();
+        
+        
+       
+    }
+//    public void tyhjennaVaihtoehdot() {
+//        vaihtoehdot= new ArrayList<String>();
+//    }
+//    
+//    public void tyhjennaArvottujenLajienLattarit() {
+//        arvottujenLajienLattarit = new ArrayList<String>();
+//    }
+//    
+//    public void tyhjennaSamanSukuiset() {
+//        samanSukuiset = new ArrayList<String>();
+//    }
+//    
+//    public void tyhjennaSamallaKirjaimellaAlkavat() {
+//        samallaKirjaimellaAlkavat = new ArrayList<String>();
+//    }
 
     public String getVaihtoehtoA() {
         return vaihtoehdot.get(0);
