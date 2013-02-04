@@ -6,6 +6,7 @@ package kayttoliittyma;
 
 import java.io.File;
 import java.util.Scanner;
+import javax.swing.JOptionPane;
 import nimivisa.NimiVisa;
 import nimivisa.NimienHallinta;
 import tiedostonKasittely.TiedostonLukija;
@@ -21,56 +22,49 @@ public class TekstiKayttoliittyma {
     private String valittuVaihtoehto;
     private boolean onkoLopetusValittu;
     private boolean jatketaankoVisaa;
-    
 
+    
     public TekstiKayttoliittyma(TiedostonValinta valinta) {
         this.valinta = valinta;
         jatketaankoVisaa = true;
-
         lukija = new Scanner(System.in);
         onkoLopetusValittu = false;
-//        hallinta = new NimienHallinta(valinta.getValittu());
-//        visa = new NimiVisa(hallinta);
-
     }
 
+
     public void kaynnista() {
+        
+        
         tulostaAloitus();
-        tiedostonValinta();
-        hallinta = new NimienHallinta(valinta.getValittu()); //ongelma, nyt kysyy vain yhtä samaa lajia...
-        visa = new NimiVisa(hallinta);  
-      
-   
-        if (onkoLopetusValittu==true) {
+        tiedostonValinta();      
+        
+        
+
+        if (onkoLopetusValittu == true) {
             System.out.println("Lopetus");
-    
+
+        } else {
+                    hallinta = new NimienHallinta(valinta.getValittu());
+        visa = new NimiVisa(hallinta);
+            System.out.println("Visa alkaa!" + "\n");
+            while (jatketaankoVisaa) {
+
+                visa.arvoLajit();
+                uusiVisaKayntiin();
+                jatketaankoVisaa();
+                hallinta.tyhjennaLajiListat();
+            }
         }
-        else {
-//      hallinta = new NimienHallinta(valinta.getValittu()); //ongelma, nyt kysyy vain yhtä samaa lajia...
-//        visa = new NimiVisa(hallinta);
-        System.out.println("Visa alkaa!" + "\n");
-        while (jatketaankoVisaa) { 
- 
-          visa.arvoLajit();
-        uusiVisaKayntiin();
-        jatketaankoVisaa();
-         hallinta.tyhjennaLajiListat();
-       
-      //   visa.arvoLajit();
-        }
-        } 
-  
+
     }
 
     public void uusiVisaKayntiin() {
-    
-               
+
         System.out.println(hallinta.getKysyttavanLajinSuomiNimi());
         System.out.println("");
         System.out.println(hallinta.getKaikkiVaihtoehdot());
         System.out.println("");
-        kysyValinta();
-        
+        kysyOikeanLajinValinta();
 
     }
 
@@ -81,21 +75,20 @@ public class TekstiKayttoliittyma {
 
     public void tiedostonValinta() {
         String valittu = lukija.nextLine();
-        
+  
+
         if (valittu.equalsIgnoreCase("X")) {
-             onkoLopetusValittu = true;
-            
-        }
-        else {
+            onkoLopetusValittu = true;
+
+        } else {
             if (!valinta.valinnanSelvitys(valittu)) {
-            System.out.println("Virheellinen syöte! Anna oikea kirjain.");
-            tiedostonValinta();
+                System.out.println("Virheellinen syöte! Anna oikea tiedostonimi.");
+                tiedostonValinta();
             }
         }
-
     }
 
-    public void kysyValinta() {
+    public void kysyOikeanLajinValinta() {
         System.out.println("Kirjoita oikean vaihtoehdon kirjain");
         valittuVaihtoehto = lukija.nextLine();
 
@@ -109,7 +102,7 @@ public class TekstiKayttoliittyma {
             }
         } else {
             System.out.println("Virheellinen kirjainvalinta!");
-            kysyValinta();
+            kysyOikeanLajinValinta();
         }
     }
 
@@ -117,18 +110,15 @@ public class TekstiKayttoliittyma {
         System.out.println("Haluatko jatkaa? k/e");
         String jatkuuko = lukija.nextLine();
 
- 
+
         if (jatkuuko.equalsIgnoreCase("k")) {
             visa.onkoVisaKaynnissa(jatketaankoVisaa);
-           
-       //     visa.arvoLajit();
-//            uusiVisaKayntiin();
-//            jatketaankoVisaa();
+
         } else if (jatkuuko.equalsIgnoreCase("e")) {
-            jatketaankoVisaa=false;
+            jatketaankoVisaa = false;
             System.out.println("Näkemiin!");
-            System.out.println("Oikeita vastauksia: " + visa.getOikeidenVastaustenLkm() + "/" +hallinta.getKysyttyjenLajienMaara()); //+hallinta.getKysytytNimetLista().size()
-        
+            System.out.println("Oikeita vastauksia: " + visa.getOikeidenVastaustenLkm() + "/" + hallinta.getKysyttyjenLajienMaara()); //+hallinta.getKysytytNimetLista().size()
+
         } else {
             System.out.println("Virheellinen syöte!");
             System.out.println("Haluatko jatkaa? k/e");

@@ -4,38 +4,48 @@
  */
 package elio;
 
+/**
+ * 
+ * @author elinakettunen
+ */
+
 public class Elio {
 
     private String suominimi;
     private String lattari;
+    
+    /**
+     * Konstruktori, joka luo Eliön, jolla on sekä suomenkielinen että latinankielinen nimi
+     * @param suominimi merkkijono, saadaan konstruktorin parametrina kun luodaan Elio-olio
+     * @param lattari merkkijono, saadaan konstruktorin parametrina kun luodaan Elio-olio
+     */
 
     public Elio(String suominimi, String lattari) {
         this.suominimi = suominimi;
         this.lattari = lattari;
     }
     
-    /**
-     * 
-     * @return eliön suomenkielinen nimi
-     */
-
     public String getSuominimi() {
         return suominimi;
     }
-
-    /**
-     * 
-     * @return eliön latinankielinen nimi
-     */
-    
+  
     public String getLattari() {
         return lattari;
     }
 
+    /**
+     * Selvittää latinankielisen nimen ensimmäisen kirjaimen
+     * @return latinankielisen nimen alkukirjain
+     */
     public String getLattarinEkaKirjain() {
         String ekaKirjain = "" + lattari.charAt(0);
         return ekaKirjain;
     }
+    
+    /**
+     * Luo merkkijonon, jossa on eliön latinankielisen nimen neljä ensimmäistä kirjainta
+     * @return palauttaa nelikirjaimisen merkkijonon
+     */
 
     public String getLattarinNeljaEkaaKirjainta() {
         String lattarinAlkuosa = "";

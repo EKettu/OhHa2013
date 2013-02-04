@@ -24,19 +24,25 @@ public class NimiVisa {
 
     }
 
+    /*'
+     * Käynnistää NimienHallinnassa tapahtuvan kysytyn ja vaihtoehtoisten lajien arvonnan
+     * ja selvittää kysytyn lajin.
+     */
     public void arvoLajit() {
-//      while(true) {
-        //       if (onkoVisaKaynnissa(totta)) {
         hallinta.kaynnistaNimienArvonta();
         kysytty = hallinta.getKysyttavaLaji();
 
-        System.out.println(kysytty.getSuominimi());
-//      }
-//          else {
-//              break;
-//          }
-//    }
+    //    System.out.println(kysytty.getSuominimi());
+
     }
+    
+  /**
+   * Selvittää, onko käyttäjän valitsema vaihtoehto oikea ja kasvattaa oikeiden vastausten lukumäärää,
+   * jos vastaus on oikea
+   * @param vaihtoehto parametri, joka saadaa käyttäjältä
+   * @return true, jos on valittu tietty kirjain ja kyseisen kirjaimen takana on lajin oikea latinankielinen
+   * nimi, false, jos ei ole oikea vaihtoehto
+   */
 
     public boolean valittiinkoOikeaVaihtoehto(String vaihtoehto) {
 
@@ -62,6 +68,11 @@ public class NimiVisa {
         return oikeitaVastauksia;
     }
 
+    /**
+     * Tarkistaa, onko NimiVisa käynnissä
+     * @param totta parametri, joka kertoo visan olevan käynnissä
+     * @return true, jos totta on true eli visa on käynnissä, false, jos ei ole
+     */
     public boolean onkoVisaKaynnissa(boolean totta) {
         this.totta = totta;
         if (totta) {

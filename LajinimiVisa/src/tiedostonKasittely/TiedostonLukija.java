@@ -10,33 +10,34 @@ import java.util.logging.Logger;
 public class TiedostonLukija {
 
     private File nimiTiedosto;
-    private int rivimaara;
- //   String [] osat;
-    
-    private Elio elio;
-    
+    private int rivimaara;    
+    private Elio elio;    
     private Map<Integer, Elio> elioidenNimet;
     private List<Elio> tiedostonEliot;
-//    private Map<String, String> nimetSuomiLatina;
-//    private Map<String, String> nimetLatinaSuomi;
     private List<String> suomiNimet;
-    private List<String> latinaNimet;
+    private ArrayList<String> latinaNimet;
+    private boolean onkoTiedostonMuotoOikea;
+    
+    
 
     public TiedostonLukija(File nimiTiedosto) {
-        this.nimiTiedosto = nimiTiedosto;
-        
-        elio = new Elio ("", "");
-        
+        this.nimiTiedosto = nimiTiedosto;        
+        elio = new Elio ("", "");       
         elioidenNimet = new HashMap<Integer, Elio>();
         tiedostonEliot = new ArrayList<Elio>();
-//        nimetSuomiLatina = new HashMap<String, String>();
-//        nimetLatinaSuomi = new HashMap<String, String>();
         suomiNimet = new ArrayList<String>();
         latinaNimet = new ArrayList<String>();
         rivimaara = 0;
+        
     }
 
-    public void jaaRivitOsiin() {
+    /**
+     * Lukee tiedoston, pilkkoo sen rivin String-taulukoksi ja tarkistaa, onko saadun taulukon muoto oikea.
+     * Jos taulukon (ja sitä kautta tiedoston) muoto on oikein, asetetaan parametrin onkoTiedostonMuotoOikein arvoksi 
+     * true ja lisätään String-taulukosta saadut merkkijonot Elio-olennollle nimiksi sekä eri listoille
+     * @return onkoTiedostonMuotoOikea (true, jos muoto on oikein, false jos ei ole)
+     */
+    public boolean jaaRivitOsiin() {
         Scanner tiedostonLukija = null;
         try {
             tiedostonLukija = new Scanner(nimiTiedosto);
@@ -47,20 +48,24 @@ public class TiedostonLukija {
         while (tiedostonLukija.hasNextLine()) {
            
             String rivi = tiedostonLukija.nextLine();
-            String[] osat = rivi.split(":"); //muuta booleaniksi ja tarkista, että onko haluttu tiedosto oikeassa muodossa
+            String[] osat = rivi.split(":"); 
             
+            if (osat.length==2) {
+            onkoTiedostonMuotoOikea = true;
             elio = new Elio(osat[0], osat[1]);
             tiedostonEliot.add(elio);
             elioidenNimet.put(rivimaara, elio);
-            
-//            nimetSuomiLatina.put(osat[0], osat[1]);
-//            nimetLatinaSuomi.put(osat[1], osat[0]);
-            
             suomiNimet.add(osat[0]);
             latinaNimet.add(osat[1]);
             rivimaara++;
+            }
             
+            else  {
+                onkoTiedostonMuotoOikea = false;
+            }         
         }
+        
+        return onkoTiedostonMuotoOikea;
 
     }
     
@@ -72,22 +77,12 @@ public class TiedostonLukija {
         return elioidenNimet;
     }
 
-//    public Map<String, String> getNimetSuomiLatina() {
-//        return nimetSuomiLatina;
-//
-//    }
-//
-//    public Map<String, String> getNimetLatinaSuomi() {
-//        return nimetLatinaSuomi;
-//
-//    }
-
     public List<String> getSuomiNimet() {
         return suomiNimet;
     }
 
     public List<String> getLatinaNimet() {
-        return latinaNimet;
+        return (List<String>) latinaNimet.clone();
     }
 
     public int getRiviLkm() {

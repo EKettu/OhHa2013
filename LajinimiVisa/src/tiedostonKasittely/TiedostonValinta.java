@@ -37,15 +37,5 @@ public class TiedostonValinta {
     public String getValittu() {
         return valittu;
     }
-//    public String getSieniTiedosto() {
-//        return "sienet.txt";
-//    }
-//
-//    public String getElainTiedosto() {
-//        return "linnut.txt";
-//    }
-//
-//    public String getKasviTiedosto() {
-//        return "kasvit.txt";
-//    }
+
 }
