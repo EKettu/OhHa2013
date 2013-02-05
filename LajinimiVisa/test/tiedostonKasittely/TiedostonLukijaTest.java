@@ -35,7 +35,7 @@ public class TiedostonLukijaTest {
 
     @Before
     public void setUp() throws FileNotFoundException {
-        tiedosto = new File("sienet.txt");
+        tiedosto = new File("testiSienet.txt");
         lukija = new TiedostonLukija(tiedosto);
         elio = new Elio("", "");
     }
@@ -59,6 +59,20 @@ public class TiedostonLukijaTest {
         lukija.jaaRivitOsiin();
         elio = lukija.getElioidenNimet().get(0);
         assertEquals(elio.getLattari(), lukija.getLatinaNimet().get(0));
+
+    }
+    
+        @Test
+    public void metodiJaaRivitOsiinPalauttaaTrueJosTiedostonMuotoOikea() {
+            lukija = new TiedostonLukija(tiedosto);
+       assertEquals(true, lukija.jaaRivitOsiin());
+
+    }
+        
+                @Test
+    public void metodiJaaRivitOsiinPalauttaaFalseJosTiedostonMuotoEiOikea() {
+            lukija = new TiedostonLukija(new File("epamaarainenTestiTiedosto"));
+       assertEquals(false, lukija.jaaRivitOsiin());
 
     }
 }

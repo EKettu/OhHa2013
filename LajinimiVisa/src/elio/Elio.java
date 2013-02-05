@@ -5,7 +5,8 @@
 package elio;
 
 /**
- * 
+ * Tehdään Eliö, jolla on suomi- ja latinanimi, sekä selvitetään luodun Eliön
+ * latinanimen ensimmäinen sekä neljä ensimmäistä kiorjainta
  * @author elinakettunen
  */
 
@@ -15,7 +16,7 @@ public class Elio {
     private String lattari;
     
     /**
-     * Konstruktori, joka luo Eliön, jolla on sekä suomenkielinen että latinankielinen nimi
+     * Luodaan Eliö jolla on sekä suomenkielinen että latinankielinen nimi
      * @param suominimi merkkijono, saadaan konstruktorin parametrina kun luodaan Elio-olio
      * @param lattari merkkijono, saadaan konstruktorin parametrina kun luodaan Elio-olio
      */

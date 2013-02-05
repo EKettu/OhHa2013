@@ -6,17 +6,24 @@ package nimivisa;
 
 import java.util.Random;
 
+/**
+ * Tehdään Arpoja, joka voi arpoa luvun tietyltä väliltä.
+ * @author elinakettunen
+ */
 
 public class Arpoja {
     
     private Random arpoja;
     
+    /**
+     * Alustetaan Random arpoja -olio.
+     */
     public Arpoja () {
         arpoja = new Random();
     }
     
     /**
-     * Arvotaan luku, joka on kahden annetun luvun välissä
+     * Arvotaan luku, joka on kahden annetun luvun välissä.
      * @param alku arvottavan luvun alaraja
      * @param loppu arvottavan luvun yläraja
      * @return arvotun luvun tietyltä väliltä

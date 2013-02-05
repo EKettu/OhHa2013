@@ -7,6 +7,12 @@ import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Lukee annetun tiedoston, pilkkoo sen osiin ja lisää erilaisille listoille tiedostosta saadut 
+ * lajinimet. 
+ * @author elinakettunen
+ */
+
 public class TiedostonLukija {
 
     private File nimiTiedosto;
@@ -18,7 +24,10 @@ public class TiedostonLukija {
     private ArrayList<String> latinaNimet;
     private boolean onkoTiedostonMuotoOikea;
     
-    
+   /**
+    * Alustaa tiedoston, Elio-olion sekä käytettävän Mapin sekä Listat. 
+    * @param nimiTiedosto konstruktorin parametrina saatava tiedosto
+    */ 
 
     public TiedostonLukija(File nimiTiedosto) {
         this.nimiTiedosto = nimiTiedosto;        

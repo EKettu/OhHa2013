@@ -7,10 +7,17 @@ package tiedostonKasittely;
 import java.io.File;
 import nimivisa.NimienHallinta;
 
+/**
+ * Tarkistetaan, onko valittua tiedostoa olemassa ja palautetaan se.
+ * @author elinakettunen
+ */
+
 public class TiedostonValinta {
 
     private String valittu;
-
+/**
+ * Alustetaan valitun tiedoston nimeä kuvaava merkkijonomuuttuja. 
+ */
     public TiedostonValinta() {
         valittu = "";
 

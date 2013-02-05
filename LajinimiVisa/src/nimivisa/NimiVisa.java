@@ -7,16 +7,26 @@ package nimivisa;
 import elio.Elio;
 import tiedostonKasittely.TiedostonValinta;
 
+/**
+ * Kutsuu NimienHallintaa ja käynnistää nimien arvonnan, tarkistaa onko käyttäjältä saatu vastaus
+ * oikea sekä pitää lukua oikeista vastauksista. Tarkistaa myös, onko visa käynnissä. 
+ * @author elinakettunen
+ */
+
 public class NimiVisa {
 
-    private TiedostonValinta valinta;
+  
     private NimienHallinta hallinta;
     Elio kysytty;
     private boolean totta;
     private int oikeitaVastauksia;
 
+    /**
+     * Alustaa oliomuuttujat.
+     * @param hallinta käyttöliittymässä saatava NimienHallinta-olio
+     */
     public NimiVisa(NimienHallinta hallinta) {
-        valinta = new TiedostonValinta();
+
         this.hallinta = hallinta;
         totta = true;
         oikeitaVastauksia = 0;
@@ -38,7 +48,7 @@ public class NimiVisa {
     
   /**
    * Selvittää, onko käyttäjän valitsema vaihtoehto oikea ja kasvattaa oikeiden vastausten lukumäärää,
-   * jos vastaus on oikea
+   * jos vastaus on oikea.
    * @param vaihtoehto parametri, joka saadaa käyttäjältä
    * @return true, jos on valittu tietty kirjain ja kyseisen kirjaimen takana on lajin oikea latinankielinen
    * nimi, false, jos ei ole oikea vaihtoehto

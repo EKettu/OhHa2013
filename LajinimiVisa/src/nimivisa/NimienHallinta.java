@@ -8,12 +8,16 @@ import kayttoliittyma.TekstiKayttoliittyma;
 import tiedostonKasittely.TiedostonValinta;
 
 /**
- * 
+ * Valitaan kysyttävät suomenkieliset lajinimet ja rakennetaan listoja sen
+ * mukaan, löytyykö tiedostosta saadusta nimilistasta samansukuisia tai samalla
+ * alkukirjaimella alkavia latinankielisiä nimiä. Arpoo myös käyttäjälle
+ * annettavan neljän vaihtoehtoisen lattarin (yksi oikea vaihtoehto)
+ * järjestyksen
+ *
  * @author elinakettunen
  */
 public class NimienHallinta {
-    
-  
+
     private TiedostonLukija lukija;
     private Elio kysyttava;
     private Map<Integer, Elio> lajienNimet;
@@ -28,11 +32,8 @@ public class NimienHallinta {
     private boolean onkoTiedostoOikea;
 
     /**
-     * Valitaan kysyttävät suomenkieliset lajinimet ja rakennetaan
-     * listoja sen mukaan, löytyykö tiedostosta saadusta nimilistasta
-     * samansukuisia tai samalla alkukirjaimella alkavia latinankielisiä nimiä.
-     * Arpoo myös käyttäjälle annettavan neljän vaihtoehtoisen lattarin (yksi
-     * oikea vaihtoehto) järjestyksen
+     * Alustaa luokassa tarvittavat listat ja luo uudet Elion, Arpojan sekä TiedostonLukijan, 
+     * joka saa parametrinaan NimienHallinta-konstruktorista saadun tiedostonNimi-nimisen uuden Tiedoston.
      *
      * @param tiedostonNimi Tiedosto, jonka sisältämiä nimiä halutaan
      * käsiteltävän
@@ -52,7 +53,7 @@ public class NimienHallinta {
         samallaKirjaimellaAlkavat = new ArrayList<String>();
         vaihtoehdot = new ArrayList<String>();
         kysyttavatEliot = lukija.getTiedostonEliot();
-        sekoitaKysyttavatLajitLista();
+        sekoitaKysyttavatEliotLista();
         kysyttyjenLajienMaara = 0;
 
     }
@@ -68,30 +69,35 @@ public class NimienHallinta {
         arvoLattarienJarjestys();
 
     }
-//    
-//    public boolean onkoTiedostoLuettavissa() {
-//        
-//        if (lukija.jaaRivitOsiin()) {
-//            onkoTiedostoOikea = true;
-//        }
-//        else {
-//            onkoTiedostoOikea = false;
-//        }
-//        return onkoTiedostoOikea;
-//    }
     
+    
+    
+ public boolean onkoTiedostoLuettavissa() {
+
+ if (lukija.jaaRivitOsiin()) {
+ onkoTiedostoOikea = true;
+ }
+ else {
+ onkoTiedostoOikea = false;
+ }
+ return onkoTiedostoOikea;
+ }
+
     /**
      * Sekoittaa kysyttävien lajien listan
      */
-
-    public void sekoitaKysyttavatLajitLista() {
+    public void sekoitaKysyttavatEliotLista() {
         Collections.shuffle(kysyttavatEliot);
 
     }
+    
+    public List<Elio> getKysyttavatEliotLista() {
+        return kysyttavatEliot;
+    }
 
     /**
-     * Määrittää, mikä on kysyttävä laji (aluksi sekoitetun listan ensimmäinen) ja huolehtii
-     * kysyttyjen lajien määrän kasvusta joka kierroksella
+     * Määrittää, mikä on kysyttävä laji (aluksi sekoitetun listan ensimmäinen)
+     * ja huolehtii kysyttyjen lajien määrän kasvusta joka kierroksella
      */
     public void hommaaKysyttavaLaji() {
 
@@ -116,15 +122,17 @@ public class NimienHallinta {
     }
 
     /**
-     * Lisää samanSukuiset-listalle kysyttävän lajin kanssa samaa sukua olevien 
+     * Lisää samanSukuiset-listalle kysyttävän lajin kanssa samaa sukua olevien
      * eliöiden lattarit, jos niitä on
-     * @param kysyttavaElio parametri, jonka metodi saa kun sitä kutsutaan kaynnistaNimienArvonta-metodissa
+     *
+     * @param kysyttavaElio parametri, jonka metodi saa kun sitä kutsutaan
+     * kaynnistaNimienArvonta-metodissa
      *
      */
     public void lisataanSamanSukuisetOmaanListaan(Elio kysyttavaElio) {
         List<String> kaikkiLattarit = lukija.getLatinaNimet();
-        kaikkiLattarit.remove(kysyttavaElio.getLattari());                  //Tähän pitäs varmaan tehdä jotain, että ei poistettaisi sitä kysyttyä lattaria miltään listalta
-        for (String samaSuku : kaikkiLattarit) {                            //Muuten näet jo kysytyt lajit eivät ainakaan päädy vaihtoehdot-listalle
+        kaikkiLattarit.remove(kysyttavaElio.getLattari());
+        for (String samaSuku : kaikkiLattarit) {
             if (samaSuku.startsWith(kysyttavaElio.getLattarinNeljaEkaaKirjainta())) {
                 samanSukuiset.add(samaSuku);
             }
@@ -137,7 +145,9 @@ public class NimienHallinta {
     }
 
     /**
-     * Tarkistaa, onko samaa sukua olevia eliötä listalla samanSukuiset vähintään kolme
+     * Tarkistaa, onko samaa sukua olevia eliötä listalla samanSukuiset
+     * vähintään kolme
+     *
      * @return true, jos on vähintään kolme, false, jos vähemmän
      */
     public boolean onkoSamanSukuisiaVahintaanKolme() {
@@ -147,13 +157,14 @@ public class NimienHallinta {
         }
         return false;
     }
-    
-    /**
-     * Lisää samallaKirjaimellaAlkavat listalle kysytyn lajin latinankielisen nimen kanssa
-     * samalla alkukirjaimella alkavia lajeja, jos niitä on
-     * @param kysyttavaElio parametri, jonka metodi saa kun sitä kutsutaan kaynnistaNimienArvonta-metodissa
-     */
 
+    /**
+     * Lisää samallaKirjaimellaAlkavat listalle kysytyn lajin latinankielisen
+     * nimen kanssa samalla alkukirjaimella alkavia lajeja, jos niitä on
+     *
+     * @param kysyttavaElio parametri, jonka metodi saa kun sitä kutsutaan
+     * kaynnistaNimienArvonta-metodissa
+     */
     public void lisataanSamallaKirjaimellaAlkavatSuvutListaan(Elio kysyttavaElio) {
         List<String> kaikkiLattarit = lukija.getLatinaNimet();
         kaikkiLattarit.remove(kysyttavaElio.getLattari());
@@ -170,7 +181,9 @@ public class NimienHallinta {
     }
 
     /**
-     * Tarkistaa, onko kysyttävn lajin lattarin kanssa samalla kirjaimella alkavia lajinimiä vähintään kolme
+     * Tarkistaa, onko kysyttävn lajin lattarin kanssa samalla kirjaimella
+     * alkavia lajinimiä vähintään kolme
+     *
      * @return true, jos on kolme tai enemmän, false jos ei
      */
     public boolean onkoSamallaKirjaimellaAlkaviaVahintaanKolme() {
@@ -180,15 +193,16 @@ public class NimienHallinta {
 
         return false;
     }
-   
+
     /**
-     * Selvittää, mitä listaa käytetään sen mukaan, onko kysytyllä lajilla samansukuisia tai 
-     * samalla kirjaimella alkavia lajeja
-     * @return samanSukuiset, jos samansukuisia lajeja on vähintää kolme, samallaKirjaimellaAlkavat 
-     * jos niitä on vähintään kolme on tai jos 
-     * ei ole kumpaakaan, niin palautetaan kaikkien lajien latinankieliset nimet sisältävä lista
+     * Selvittää, mitä listaa käytetään sen mukaan, onko kysytyllä lajilla
+     * samansukuisia tai samalla kirjaimella alkavia lajeja
+     *
+     * @return samanSukuiset, jos samansukuisia lajeja on vähintää kolme,
+     * samallaKirjaimellaAlkavat jos niitä on vähintään kolme on tai jos ei ole
+     * kumpaakaan, niin palautetaan kaikkien lajien latinankieliset nimet
+     * sisältävä lista
      */
-    
     public List<String> getListaJostaLattaritArvotaan() {
         if (onkoSamanSukuisiaVahintaanKolme()) {
             return samanSukuiset;
@@ -200,12 +214,13 @@ public class NimienHallinta {
     }
 
     /**
-     * Arpoo kolme muuta lajia, joiden lattarit käyttäjä tulee näkymään, se mistä listasta
-     * lajit arvotaan, riippuu getListaJostaLattaritArvotaan-metodin tuloksesta
-     * arvottujenLajienLattarit-lista ei saa kasvaa yli kolmen mittaiseksi eikä se saa sisältää 
-     * kysyttävää lajia tai jotain toista lajia kahteen kertaan
+     * Arpoo kolme muuta lajia, joiden lattarit käyttäjä tulee näkymään, se
+     * mistä listasta lajit arvotaan, riippuu
+     * getListaJostaLattaritArvotaan-metodin tuloksesta
+     * arvottujenLajienLattarit-lista ei saa kasvaa yli kolmen mittaiseksi eikä
+     * se saa sisältää kysyttävää lajia tai jotain toista lajia kahteen kertaan
      * Lopuksi lisätään kolme saatua lajia arvottujenLajienLattarit-listalle
-     * 
+     *
      */
     public void arvoMuutKolmeLajia() {
 
@@ -228,9 +243,9 @@ public class NimienHallinta {
     }
 
     /**
-     * Lisää kysytyn lajin arvottujenLajienLattarit listalle, jonka jälkeen lisää kaikki neljä lajia
-     * vaihtoehdot-listalle. Lopuksi sekoitetaan vaihtoehdot-lista, jolloin oikea laji päätyy satunnaiselle
-     * paikalle
+     * Lisää kysytyn lajin arvottujenLajienLattarit listalle, jonka jälkeen
+     * lisää kaikki neljä lajia vaihtoehdot-listalle. Lopuksi sekoitetaan
+     * vaihtoehdot-lista, jolloin oikea laji päätyy satunnaiselle paikalle
      */
     public void arvoLattarienJarjestys() {
         arvottujenLajienLattarit.add(kysyttava.getLattari());
@@ -243,8 +258,9 @@ public class NimienHallinta {
     }
 
     /**
-     * Luo uudelleen listat samanSukuiset, samallaKirjaimellaAlkavat, arvottujenLajienLattarit sekä
-     * vaihtoehdot, jotteivat ne pääse kasvamaan ylisuuriksi ja uusi kyselykierros toimii
+     * Luo uudelleen listat samanSukuiset, samallaKirjaimellaAlkavat,
+     * arvottujenLajienLattarit sekä vaihtoehdot, jotteivat ne pääse kasvamaan
+     * ylisuuriksi ja uusi kyselykierros toimii
      */
     public void tyhjennaLajiListat() {
         samanSukuiset = new ArrayList<String>();

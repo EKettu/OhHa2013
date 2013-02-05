@@ -15,13 +15,13 @@ public class Main {
      */
     public static void main(String[] args) throws FileNotFoundException {
         
-//        TiedostonValinta valinta = new TiedostonValinta();
+        TiedostonValinta valinta = new TiedostonValinta();
+        
+        TekstiKayttoliittyma liittyma = new TekstiKayttoliittyma(valinta);
+        liittyma.kaynnista();
 //        
-//        TekstiKayttoliittyma liittyma = new TekstiKayttoliittyma(valinta);
-//        liittyma.kaynnista();
-//        
-        Kayttoliittyma kayttis = new Kayttoliittyma();
-        kayttis.run();
+//        Kayttoliittyma kayttis = new Kayttoliittyma();
+//        kayttis.run();
 
     }
 }

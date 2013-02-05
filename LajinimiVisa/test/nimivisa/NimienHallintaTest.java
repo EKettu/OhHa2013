@@ -177,5 +177,22 @@ public class NimienHallintaTest {
         hallinta.lisataanSamallaKirjaimellaAlkavatSuvutListaan(kysyttyLaji);
         assertEquals(false, hallinta.onkoSamallaKirjaimellaAlkaviaVahintaanKolme());
     }
+        
+                @Test
+    public void tyhjennaListatMetodiToimiiVaihtoehdotTyhjenee() {
+        hallinta.kaynnistaNimienArvonta();
+        hallinta.tyhjennaLajiListat();
+        
+        assertEquals(0, hallinta.getVaihtoehdotListanPituus());
+    }
+        
+//                              @Test
+//    public void kysyttavatEliotListaSekoitetaanToimii() {
+//        List<Elio> alkuperaisetEliotJarjestyksessa = hallinta.getKysyttavatEliotLista();
+//        hallinta.sekoitaKysyttavatEliotLista();
+//        
+//        assertThat(hallinta.getKysyttavatEliotLista(), not(alkuperaisetEliotJarjestyksessa));
+//    }
+   
 }
 

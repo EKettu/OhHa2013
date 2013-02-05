@@ -23,7 +23,6 @@ public class TekstiKayttoliittyma {
     private boolean onkoLopetusValittu;
     private boolean jatketaankoVisaa;
 
-    
     public TekstiKayttoliittyma(TiedostonValinta valinta) {
         this.valinta = valinta;
         jatketaankoVisaa = true;
@@ -31,28 +30,30 @@ public class TekstiKayttoliittyma {
         onkoLopetusValittu = false;
     }
 
-
     public void kaynnista() {
-        
-        
+
+
         tulostaAloitus();
-        tiedostonValinta();      
-        
-        
+        tiedostonValinta();
 
         if (onkoLopetusValittu == true) {
             System.out.println("Lopetus");
 
         } else {
-                    hallinta = new NimienHallinta(valinta.getValittu());
-        visa = new NimiVisa(hallinta);
-            System.out.println("Visa alkaa!" + "\n");
-            while (jatketaankoVisaa) {
+            hallinta = new NimienHallinta(valinta.getValittu());
 
-                visa.arvoLajit();
-                uusiVisaKayntiin();
-                jatketaankoVisaa();
-                hallinta.tyhjennaLajiListat();
+            if (hallinta.onkoTiedostoLuettavissa()) {
+                visa = new NimiVisa(hallinta);
+                System.out.println("Visa alkaa!" + "\n");
+                while (jatketaankoVisaa) {
+
+                    visa.arvoLajit();
+                    uusiVisaKayntiin();
+                    jatketaankoVisaa();
+                    hallinta.tyhjennaLajiListat();
+                }
+            } else {
+                System.out.println("Tiedosto ei oikeassa muodossa.");
             }
         }
 
@@ -75,7 +76,7 @@ public class TekstiKayttoliittyma {
 
     public void tiedostonValinta() {
         String valittu = lukija.nextLine();
-  
+
 
         if (valittu.equalsIgnoreCase("X")) {
             onkoLopetusValittu = true;
