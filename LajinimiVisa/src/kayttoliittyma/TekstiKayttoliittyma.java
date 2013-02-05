@@ -12,6 +12,13 @@ import nimivisa.NimienHallinta;
 import tiedostonKasittely.TiedostonLukija;
 import tiedostonKasittely.TiedostonValinta;
 
+/**
+ * Käyttöliittymä, josta ohjelmaa käytetään, kysyy halutun tiedoston
+ * käyttäjältä, tarkistaa että se on kunnossa, kysyy mikä vaihtoehdoista
+ * valitaan ja jatketaanko visaa.
+ *
+ * @author elinakettunen
+ */
 public class TekstiKayttoliittyma {
 
     private Scanner lukija;
@@ -23,6 +30,12 @@ public class TekstiKayttoliittyma {
     private boolean onkoLopetusValittu;
     private boolean jatketaankoVisaa;
 
+    /**
+     * Luo uuden lukija-skannerin, alustaa boolean-muuttujat ja
+     * Tiedostonvalinta-olion.
+     *
+     * @param valinta konstruktorin parametrina saama TiedostonValinta-olio
+     */
     public TekstiKayttoliittyma(TiedostonValinta valinta) {
         this.valinta = valinta;
         jatketaankoVisaa = true;
@@ -43,6 +56,7 @@ public class TekstiKayttoliittyma {
             hallinta = new NimienHallinta(valinta.getValittu());
 
             if (hallinta.onkoTiedostoLuettavissa()) {
+
                 visa = new NimiVisa(hallinta);
                 System.out.println("Visa alkaa!" + "\n");
                 while (jatketaankoVisaa) {
@@ -110,7 +124,6 @@ public class TekstiKayttoliittyma {
     public void jatketaankoVisaa() {
         System.out.println("Haluatko jatkaa? k/e");
         String jatkuuko = lukija.nextLine();
-
 
         if (jatkuuko.equalsIgnoreCase("k")) {
             visa.onkoVisaKaynnissa(jatketaankoVisaa);
