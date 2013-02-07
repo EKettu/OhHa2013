@@ -55,15 +55,16 @@ public class TekstiKayttoliittyma {
         } else {
             hallinta = new NimienHallinta(valinta.getValittu());
 
-            if (hallinta.onkoTiedostoLuettavissa()) {
+         if (hallinta.onkoTiedostoLuettavissa()) {
 
                 visa = new NimiVisa(hallinta);
                 System.out.println("Visa alkaa!" + "\n");
                 while (jatketaankoVisaa) {
-
+                    System.out.println("ppaaa");
                     visa.arvoLajit();
                     uusiVisaKayntiin();
                     jatketaankoVisaa();
+                    
                     hallinta.tyhjennaLajiListat();
                 }
             } else {
@@ -74,7 +75,7 @@ public class TekstiKayttoliittyma {
     }
 
     public void uusiVisaKayntiin() {
-
+        System.out.println("uusi visa toimii");
         System.out.println(hallinta.getKysyttavanLajinSuomiNimi());
         System.out.println("");
         System.out.println(hallinta.getKaikkiVaihtoehdot());
@@ -126,7 +127,8 @@ public class TekstiKayttoliittyma {
         String jatkuuko = lukija.nextLine();
 
         if (jatkuuko.equalsIgnoreCase("k")) {
-            visa.onkoVisaKaynnissa(jatketaankoVisaa);
+            jatketaankoVisaa = true;
+       //     visa.onkoVisaKaynnissa(jatketaankoVisaa);
 
         } else if (jatkuuko.equalsIgnoreCase("e")) {
             jatketaankoVisaa = false;

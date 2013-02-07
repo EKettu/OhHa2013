@@ -32,8 +32,9 @@ public class NimienHallinta {
     private boolean onkoTiedostoOikea;
 
     /**
-     * Alustaa luokassa tarvittavat listat ja luo uudet Elion, Arpojan sekä TiedostonLukijan, 
-     * joka saa parametrinaan NimienHallinta-konstruktorista saadun tiedostonNimi-nimisen uuden Tiedoston.
+     * Alustaa luokassa tarvittavat listat ja luo uudet Elion, Arpojan sekä
+     * TiedostonLukijan, joka saa parametrinaan NimienHallinta-konstruktorista
+     * saadun tiedostonNimi-nimisen uuden Tiedoston.
      *
      * @param tiedostonNimi Tiedosto, jonka sisältämiä nimiä halutaan
      * käsiteltävän
@@ -55,6 +56,8 @@ public class NimienHallinta {
         kysyttavatEliot = lukija.getTiedostonEliot();
         sekoitaKysyttavatEliotLista();
         kysyttyjenLajienMaara = 0;
+        
+        onkoTiedostoOikea = true;
 
     }
 
@@ -62,6 +65,7 @@ public class NimienHallinta {
      * Metodi, joka käynnistää nimien arvonnan kutsumalla muita luokan metodeja
      */
     public void kaynnistaNimienArvonta() {
+        
         hommaaKysyttavaLaji();
         lisataanSamanSukuisetOmaanListaan(getKysyttavaLaji());
         lisataanSamallaKirjaimellaAlkavatSuvutListaan(getKysyttavaLaji());
@@ -69,19 +73,16 @@ public class NimienHallinta {
         arvoLattarienJarjestys();
 
     }
-    
-    
-    
- public boolean onkoTiedostoLuettavissa() {
 
- if (lukija.jaaRivitOsiin()) {
- onkoTiedostoOikea = true;
- }
- else {
- onkoTiedostoOikea = false;
- }
- return onkoTiedostoOikea;
- }
+    public boolean onkoTiedostoLuettavissa() {
+
+        if (lukija.getOnkoTiedostonMuotoOikea()) {
+            onkoTiedostoOikea = true;
+        } else {
+            onkoTiedostoOikea = false;
+        }
+        return onkoTiedostoOikea;
+    }
 
     /**
      * Sekoittaa kysyttävien lajien listan
@@ -90,7 +91,7 @@ public class NimienHallinta {
         Collections.shuffle(kysyttavatEliot);
 
     }
-    
+
     public List<Elio> getKysyttavatEliotLista() {
         return kysyttavatEliot;
     }
@@ -133,11 +134,11 @@ public class NimienHallinta {
         List<String> kaikkiLattarit = lukija.getLatinaNimet();
         kaikkiLattarit.remove(kysyttavaElio.getLattari());
         for (String samaSuku : kaikkiLattarit) {
-            if (samaSuku.startsWith(kysyttavaElio.getLattarinNeljaEkaaKirjainta())) {
+            if (samaSuku.startsWith(kysyttavaElio.getLattarinNeljaEkaaKirjainta()) && !samanSukuiset.contains(samaSuku)) {
                 samanSukuiset.add(samaSuku);
             }
         }
-        //     kaikkiLattarit = lukija.getLatinaNimet();
+
     }
 
     public List<String> getSamanSukuiset() {
@@ -169,11 +170,11 @@ public class NimienHallinta {
         List<String> kaikkiLattarit = lukija.getLatinaNimet();
         kaikkiLattarit.remove(kysyttavaElio.getLattari());
         for (String samaKirjain : kaikkiLattarit) {
-            if (samaKirjain.startsWith(kysyttavaElio.getLattarinEkaKirjain())) {
+            if (samaKirjain.startsWith(kysyttavaElio.getLattarinEkaKirjain()) && !samallaKirjaimellaAlkavat.contains(samaKirjain)) {
                 samallaKirjaimellaAlkavat.add(samaKirjain);
             }
         }
-        //  kaikkiLattarit = lukija.getLatinaNimet();
+
     }
 
     public List<String> getSamallaKirjaimellaAlkavat() {
@@ -223,9 +224,10 @@ public class NimienHallinta {
      *
      */
     public void arvoMuutKolmeLajia() {
-
+       
         while (arvottujenLajienLattarit.size() < 3) {
             int arvottava = arvonta.arvoLukuValilta(0, getListaJostaLattaritArvotaan().size());
+            
             //   int arvottava = arpoja.nextInt(getListaJostaLattaritArvotaan().size());
             String arvottuLattari = getListaJostaLattaritArvotaan().get(arvottava);
 

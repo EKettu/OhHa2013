@@ -8,45 +8,50 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Lukee annetun tiedoston, pilkkoo sen osiin ja lisää erilaisille listoille tiedostosta saadut 
- * lajinimet. 
+ * Lukee annetun tiedoston, pilkkoo sen osiin ja lisää erilaisille listoille
+ * tiedostosta saadut lajinimet.
+ *
  * @author elinakettunen
  */
-
 public class TiedostonLukija {
 
     private File nimiTiedosto;
-    private int rivimaara;    
-    private Elio elio;    
+    private int rivimaara;
+    private Elio elio;
     private Map<Integer, Elio> elioidenNimet;
     private List<Elio> tiedostonEliot;
     private List<String> suomiNimet;
     private ArrayList<String> latinaNimet;
     private boolean onkoTiedostonMuotoOikea;
-    
-   /**
-    * Alustaa tiedoston, Elio-olion sekä käytettävän Mapin sekä Listat. 
-    * @param nimiTiedosto konstruktorin parametrina saatava tiedosto
-    */ 
 
+    /**
+     * Alustaa tiedoston, Elio-olion sekä käytettävän Mapin sekä Listat.
+     *
+     * @param nimiTiedosto konstruktorin parametrina saatava tiedosto
+     */
     public TiedostonLukija(File nimiTiedosto) {
-        this.nimiTiedosto = nimiTiedosto;        
-        elio = new Elio ("", "");       
+        this.nimiTiedosto = nimiTiedosto;
+        elio = new Elio("", "");
         elioidenNimet = new HashMap<Integer, Elio>();
         tiedostonEliot = new ArrayList<Elio>();
         suomiNimet = new ArrayList<String>();
         latinaNimet = new ArrayList<String>();
         rivimaara = 0;
-        
+        onkoTiedostonMuotoOikea = true;
+
     }
 
     /**
-     * Lukee tiedoston, pilkkoo sen rivin String-taulukoksi ja tarkistaa, onko saadun taulukon muoto oikea.
-     * Jos taulukon (ja sitä kautta tiedoston) muoto on oikein, asetetaan parametrin onkoTiedostonMuotoOikein arvoksi 
-     * true ja lisätään String-taulukosta saadut merkkijonot Elio-olennollle nimiksi sekä eri listoille
-     * @return onkoTiedostonMuotoOikea (true, jos muoto on oikein, false jos ei ole)
+     * Lukee tiedoston, pilkkoo sen rivin String-taulukoksi ja tarkistaa, onko
+     * saadun taulukon muoto oikea. Jos taulukon (ja sitä kautta tiedoston)
+     * muoto on oikein, asetetaan parametrin onkoTiedostonMuotoOikein arvoksi
+     * true ja lisätään String-taulukosta saadut merkkijonot Elio-olennollle
+     * nimiksi sekä eri listoille
+     *
+     * @return onkoTiedostonMuotoOikea (true, jos muoto on oikein, false jos ei
+     * ole)
      */
-    public boolean jaaRivitOsiin() {
+    public void jaaRivitOsiin() {
         Scanner tiedostonLukija = null;
         try {
             tiedostonLukija = new Scanner(nimiTiedosto);
@@ -55,33 +60,37 @@ public class TiedostonLukija {
         }
 
         while (tiedostonLukija.hasNextLine()) {
-           
-            String rivi = tiedostonLukija.nextLine();
-            String[] osat = rivi.split(":"); 
-            
-            if (osat.length==2) {
-            onkoTiedostonMuotoOikea = true;
-            elio = new Elio(osat[0], osat[1]);
-            tiedostonEliot.add(elio);
-            elioidenNimet.put(rivimaara, elio);
-            suomiNimet.add(osat[0]);
-            latinaNimet.add(osat[1]);
-            rivimaara++;
-            }
-            
-            else  {
-                onkoTiedostonMuotoOikea = false;
-            }         
-        }
-        
-        return onkoTiedostonMuotoOikea;
 
+            String rivi = tiedostonLukija.nextLine();
+            String[] osat = rivi.split(":");
+            
+            if (osat.length != 2) {
+                onkoTiedostonMuotoOikea = false;
+                
+
+            } else {
+                onkoTiedostonMuotoOikea = true;
+                elio = new Elio(osat[0], osat[1]);
+                tiedostonEliot.add(elio);
+                elioidenNimet.put(rivimaara, elio);
+                suomiNimet.add(osat[0]);
+                latinaNimet.add(osat[1]);
+                rivimaara++;
+                
+            }
+        }
+
+ 
     }
     
+    public boolean getOnkoTiedostonMuotoOikea (){
+        return onkoTiedostonMuotoOikea;
+    }
+
     public List<Elio> getTiedostonEliot() {
         return tiedostonEliot;
     }
-    
+
     public Map<Integer, Elio> getElioidenNimet() {
         return elioidenNimet;
     }
@@ -97,24 +106,4 @@ public class TiedostonLukija {
     public int getRiviLkm() {
         return rivimaara;
     }
-    
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

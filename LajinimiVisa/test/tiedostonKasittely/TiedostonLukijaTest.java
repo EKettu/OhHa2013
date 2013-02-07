@@ -63,16 +63,18 @@ public class TiedostonLukijaTest {
     }
     
         @Test
-    public void metodiJaaRivitOsiinPalauttaaTrueJosTiedostonMuotoOikea() {
+    public void metodiJaaRivitOsiinTunnistaaJosTiedostonMuotoOikea() {
             lukija = new TiedostonLukija(tiedosto);
-       assertEquals(true, lukija.jaaRivitOsiin());
+            lukija.jaaRivitOsiin();
+       assertEquals(true, lukija.getOnkoTiedostonMuotoOikea());
 
     }
         
                 @Test
-    public void metodiJaaRivitOsiinPalauttaaFalseJosTiedostonMuotoEiOikea() {
+    public void metodiJaaRivitOsiinTunnistaaJosTiedostonMuotoEiOikea() {
             lukija = new TiedostonLukija(new File("epamaarainenTestiTiedosto"));
-       assertEquals(false, lukija.jaaRivitOsiin());
+            lukija.jaaRivitOsiin();
+       assertEquals(false, lukija.getOnkoTiedostonMuotoOikea());
 
     }
 }

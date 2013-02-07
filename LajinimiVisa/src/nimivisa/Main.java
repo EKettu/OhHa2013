@@ -14,14 +14,14 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws FileNotFoundException {
-        
-        TiedostonValinta valinta = new TiedostonValinta();
-        
-        TekstiKayttoliittyma liittyma = new TekstiKayttoliittyma(valinta);
-        liittyma.kaynnista();
 //        
-//        Kayttoliittyma kayttis = new Kayttoliittyma();
-//        kayttis.run();
+//        TiedostonValinta valinta = new TiedostonValinta();
+//        
+//        TekstiKayttoliittyma liittyma = new TekstiKayttoliittyma(valinta);
+//        liittyma.kaynnista();
+        
+        Kayttoliittyma kayttis = new Kayttoliittyma();
+        kayttis.run();
 
     }
 }

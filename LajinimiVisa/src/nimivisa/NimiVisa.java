@@ -39,10 +39,9 @@ public class NimiVisa {
      * ja selvittää kysytyn lajin.
      */
     public void arvoLajit() {
+
         hallinta.kaynnistaNimienArvonta();
         kysytty = hallinta.getKysyttavaLaji();
-
-    //    System.out.println(kysytty.getSuominimi());
 
     }
     
