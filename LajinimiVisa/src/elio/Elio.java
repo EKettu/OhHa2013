@@ -7,7 +7,7 @@ package elio;
 /**
  * Tehdään Eliö, jolla on suomi- ja latinanimi, sekä selvitetään luodun Eliön
  * latinanimen ensimmäinen sekä neljä ensimmäistä kiorjainta
- * @author elinakettunen
+ * @author ekettu
  */
 
 public class Elio {

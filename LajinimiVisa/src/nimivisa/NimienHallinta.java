@@ -8,13 +8,9 @@ import kayttoliittyma.TekstiKayttoliittyma;
 import tiedostonKasittely.TiedostonValinta;
 
 /**
- * Valitaan kysyttävät suomenkieliset lajinimet ja rakennetaan listoja sen
- * mukaan, löytyykö tiedostosta saadusta nimilistasta samansukuisia tai samalla
- * alkukirjaimella alkavia latinankielisiä nimiä. Arpoo myös käyttäjälle
- * annettavan neljän vaihtoehtoisen lattarin (yksi oikea vaihtoehto)
- * järjestyksen
+ * Hallinnoi TiedostonLukijalta saatavia nimilistoja, palauttaa kysyttävän lajin ja kolme vaihtoehtoa
  *
- * @author elinakettunen
+ * @author ekettu
  */
 public class NimienHallinta {
 

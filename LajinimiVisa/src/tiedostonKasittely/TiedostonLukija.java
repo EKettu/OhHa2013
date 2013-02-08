@@ -11,7 +11,7 @@ import java.util.logging.Logger;
  * Lukee annetun tiedoston, pilkkoo sen osiin ja lisää erilaisille listoille
  * tiedostosta saadut lajinimet.
  *
- * @author elinakettunen
+ * @author ekettu
  */
 public class TiedostonLukija {
 

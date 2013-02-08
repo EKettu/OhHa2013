@@ -8,7 +8,7 @@ import java.util.Random;
 
 /**
  * Tehdään Arpoja, joka voi arpoa luvun tietyltä väliltä.
- * @author elinakettunen
+ * @author ekettu
  */
 
 public class Arpoja {

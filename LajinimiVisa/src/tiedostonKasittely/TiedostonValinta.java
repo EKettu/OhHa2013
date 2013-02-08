@@ -9,7 +9,7 @@ import nimivisa.NimienHallinta;
 
 /**
  * Tarkistetaan, onko valittua tiedostoa olemassa ja palautetaan se.
- * @author elinakettunen
+ * @author ekettu
  */
 
 public class TiedostonValinta {

@@ -17,7 +17,7 @@ import tiedostonKasittely.TiedostonValinta;
  * käyttäjältä, tarkistaa että se on kunnossa, kysyy mikä vaihtoehdoista
  * valitaan ja jatketaanko visaa.
  *
- * @author elinakettunen
+ * @author ekettu
  */
 public class TekstiKayttoliittyma {
 

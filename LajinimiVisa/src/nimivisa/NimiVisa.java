@@ -10,7 +10,7 @@ import tiedostonKasittely.TiedostonValinta;
 /**
  * Kutsuu NimienHallintaa ja käynnistää nimien arvonnan, tarkistaa onko käyttäjältä saatu vastaus
  * oikea sekä pitää lukua oikeista vastauksista. Tarkistaa myös, onko visa käynnissä. 
- * @author elinakettunen
+ * @author ekettu
  */
 
 public class NimiVisa {
