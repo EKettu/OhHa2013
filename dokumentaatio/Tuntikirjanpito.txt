@@ -18,4 +18,7 @@ Tuntikirjanpito
 4.2.2013: noin 1,5h ohjelmointia pajalla (kysyttyjen lajien lattarien poisto -ongelma saatiin ratkaistua, testejä hiukan), noin 0,5 ohjelmointia kotona (koodin siistimistä)
 5.2.2013: noin 2h ohjelmointia pajalla (ohjelma tarkistaa, onko tiedosto luettavissa), sekvenssikaavioiden tekoa, noin 1h sekvenssikaavioiden säätöä ja koodausta kotona, ongelmana nyt ohjelman outo jumitus kesken suorituksen
 7.2.2013: noin 2h pajaa, jumitusongelma saatiin ratkaistua poistamalla ylimääräinen metodikutsu, graafisen käyttöliittymän ja tapahtumankuuntelijan säätöä
-8.2.2013: koodikatselmusta, projektin lataus klo 17.00
+8.2.2013: koodikatselmusta, projektin lataus klo 17.00 (noin 0,5h alustavaa tutustumista)
+9.2.2013: koodikatselmusta noin 1,5h, noin 1h graafisen käyttöliittymän pohdintaa
+10.2.2013: koodikatselmuksen kommenttien kokoaminen ja lähetys (noin 0,5h)
+11.2.2013: noin 1h paljalla askartelua graafisen käyttöliittymän ja siihen liittyvien muiden luokkien kanssa, noin 0,5 kotona jatkoa

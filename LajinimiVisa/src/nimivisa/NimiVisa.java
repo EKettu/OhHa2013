@@ -76,17 +76,17 @@ public class NimiVisa {
     public int getOikeidenVastaustenLkm() {
         return oikeitaVastauksia;
     }
-
-    /**
-     * Tarkistaa, onko NimiVisa käynnissä
-     * @param totta parametri, joka kertoo visan olevan käynnissä
-     * @return true, jos totta on true eli visa on käynnissä, false, jos ei ole
-     */
-    public boolean onkoVisaKaynnissa(boolean totta) {
-        this.totta = totta;
-        if (totta) {
-            return true;
-        }
-        return false;
-    }
+//
+//    /**
+//     * Tarkistaa, onko NimiVisa käynnissä
+//     * @param totta parametri, joka kertoo visan olevan käynnissä
+//     * @return true, jos totta on true eli visa on käynnissä, false, jos ei ole
+//     */
+////    public boolean onkoVisaKaynnissa(boolean totta) {
+////        this.totta = totta;
+////        if (totta) {
+////            return true;
+////        }
+////        return false;
+////    }
 }
