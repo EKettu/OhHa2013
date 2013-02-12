@@ -13,9 +13,7 @@ import tiedostonKasittely.TiedostonLukija;
 import tiedostonKasittely.TiedostonValinta;
 
 /**
- * Käyttöliittymä, josta ohjelmaa käytetään, kysyy halutun tiedoston
- * käyttäjältä, tarkistaa että se on kunnossa, kysyy mikä vaihtoehdoista
- * valitaan ja jatketaanko visaa.
+ * Tekstipohjainen käyttöliittymä, joka huolehtii lajinimien kyselystä ja kommunikoi käyttäjän kanssa.
  *
  * @author ekettu
  */
@@ -43,6 +41,11 @@ public class TekstiKayttoliittyma {
         onkoLopetusValittu = false;
     }
 
+    /**
+     * Käynnistää ja ylläpitää visailua niin kauan kuin käyttäjä haluaa, mikäli 
+     * tiedostoa valitessa ei ole valittu lopetusta tai tiedosto ei ole
+     * luettavassa muodossa.
+     */
     public void kaynnista() {
 
 
@@ -74,6 +77,10 @@ public class TekstiKayttoliittyma {
 
     }
 
+    /**
+     * Tulostaa kysyttävän lajin ja vaihtoehtoiset latinanimet
+     * ja kutsuu valinnan kysymistä käyttäjältä.
+     */
     public void uusiVisaKayntiin() {
         
         System.out.println(hallinta.getKysyttavanLajinSuomiNimi());
@@ -84,11 +91,19 @@ public class TekstiKayttoliittyma {
 
     }
 
+    /**
+     * Tulostaa ohjelman ensimmäisen rivin.
+     */
     public void tulostaAloitus() {
         System.out.println("Kirjoita haluamasi tiedoston nimi. X lopettaa");
 
     }
 
+    /**
+     * Kysyy käyttäjältä halutun tiedoston tai lopetusmerkin,
+     * selvittää onko tiedosto olemassa
+     * 
+     */
     public void tiedostonValinta() {
         String valittu = lukija.nextLine();
 
@@ -104,6 +119,12 @@ public class TekstiKayttoliittyma {
         }
     }
 
+    /**
+     * Kysyy käyttäjältä, minkä vaihtoehdon tämä valitsee ja 
+     * selvittää NimiVisan kautta, menikö vastaus oikein. Kysyy kirjainta niin kauan, 
+     * kunnes se on joko a, b, c tai d, eli käyttäjä ei voi syöttää muuta kuin jonkun em. neljästä
+     * kirjaimesta päästäkseen eteenpäin. 
+     */
     public void kysyOikeanLajinValinta() {
         System.out.println("Kirjoita oikean vaihtoehdon kirjain");
         valittuVaihtoehto = lukija.nextLine();
@@ -122,13 +143,17 @@ public class TekstiKayttoliittyma {
         }
     }
 
+    /**
+     * Vaihtoehdon valinnan ja oikean vastauksen selvityksen jälkeen kysyy, haluaako käyttäjä jatkaa
+     * visaa, k-kirjain jatkaa, e-lopettaa. Jos valitaan lopetus, tulostaa tiedon kuinka monta vastausta meni
+     * oikein. Jos yritetään syöttää joku muu kuin k tai e, kysyy uudestaan oikeaa syötettä. 
+     */
     public void jatketaankoVisaa() {
         System.out.println("Haluatko jatkaa? k/e");
         String jatkuuko = lukija.nextLine();
 
         if (jatkuuko.equalsIgnoreCase("k")) {
             jatketaankoVisaa = true;
-       //     visa.onkoVisaKaynnissa(jatketaankoVisaa);
 
         } else if (jatkuuko.equalsIgnoreCase("e")) {
             jatketaankoVisaa = false;

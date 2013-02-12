@@ -8,4 +8,4 @@ KŠyttŠjŠt: Opiskelija
 Opiskelijan toiminnot: 
 Opiskelija valitsee, minkŠ elišryhmŠn nimiŠ ohjelma kysyy
 Opiskelija nŠkee elišn suomenkielisen nimen ja valitsee sitŠ vastaavan tieteellisen nimen neljŠn vaihtoehdon joukosta
-Opiskelija tarkastelee tilastoa oikein menneistŠ vastauksista
+Opiskelija nŠkee menikš vastaus oikein vai vŠŠrin ja oikeiden vastausten lukumŠŠrŠn

@@ -7,7 +7,7 @@ package nimivisa;
 import java.util.Random;
 
 /**
- * Tehdään Arpoja, joka voi arpoa luvun tietyltä väliltä.
+ * Huolehtii satunnaisen luvun arpomisesta tietyltä väliltä. 
  * @author ekettu
  */
 

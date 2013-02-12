@@ -5,14 +5,20 @@
 package elio;
 
 /**
- * Tehdään Eliö, jolla on suomi- ja latinanimi, sekä selvitetään luodun Eliön
- * latinanimen ensimmäinen sekä neljä ensimmäistä kiorjainta
+ * Kaksi eri nimeä omaavista eliöistä huolehtiva luokka
  * @author ekettu
  */
 
 public class Elio {
 
+    /**
+     * Eliön suomenkielinen nimi
+     */
     private String suominimi;
+    
+    /**
+     * Eliön latinankielinen eli tieteellinen nimi
+     */
     private String lattari;
     
     /**

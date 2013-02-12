@@ -8,8 +8,7 @@ import elio.Elio;
 import tiedostonKasittely.TiedostonValinta;
 
 /**
- * Kutsuu NimienHallintaa ja käynnistää nimien arvonnan, tarkistaa onko käyttäjältä saatu vastaus
- * oikea sekä pitää lukua oikeista vastauksista. Tarkistaa myös, onko visa käynnissä. 
+ * Kutsuu NimienHallintaa käynnistäen lajien arvonnan ja selvittää käyttäjän vastauksen oikeellisuuden.
  * @author ekettu
  */
 
@@ -46,7 +45,7 @@ public class NimiVisa {
     }
     
   /**
-   * Selvittää, onko käyttäjän valitsema vaihtoehto oikea ja kasvattaa oikeiden vastausten lukumäärää,
+   * Selvittää, onko käyttäjän tekstikäyttöliittymässä valitsema vaihtoehto oikea ja kasvattaa oikeiden vastausten lukumäärää,
    * jos vastaus on oikea.
    * @param vaihtoehto parametri, joka saadaa käyttäjältä
    * @return true, jos on valittu tietty kirjain ja kyseisen kirjaimen takana on lajin oikea latinankielinen
@@ -72,7 +71,13 @@ public class NimiVisa {
         }
 
     }
-    
+     
+    /**
+   * Selvittää, onko käyttäjän graafisessa käyttöliittymässä valitsema vaihtoehto oikea ja kasvattaa oikeiden vastausten lukumäärää,
+   * jos vastaus on oikea.
+   * @param vaihtoehto parametri, joka saadaa Kayttoliittyma-luokalta, eli kayttajan valitsema vaihtoehto
+   * @return true, jos valittu vaihtoehto vastaa kysyttävän lajin latinankielistä nimeä, false jos ei vastaa
+   */
     
         public boolean valittiinkoOikeaVaihtoehtoGraafinen(String vaihtoehto) {
 
@@ -88,17 +93,5 @@ public class NimiVisa {
     public int getOikeidenVastaustenLkm() {
         return oikeitaVastauksia;
     }
-//
-//    /**
-//     * Tarkistaa, onko NimiVisa käynnissä
-//     * @param totta parametri, joka kertoo visan olevan käynnissä
-//     * @return true, jos totta on true eli visa on käynnissä, false, jos ei ole
-//     */
-////    public boolean onkoVisaKaynnissa(boolean totta) {
-////        this.totta = totta;
-////        if (totta) {
-////            return true;
-////        }
-////        return false;
-////    }
+
 }
