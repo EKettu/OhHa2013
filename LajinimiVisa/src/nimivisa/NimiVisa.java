@@ -73,6 +73,18 @@ public class NimiVisa {
 
     }
     
+    
+        public boolean valittiinkoOikeaVaihtoehtoGraafinen(String vaihtoehto) {
+
+        if (vaihtoehto.equals(hallinta.getKysyttavanLajinLattari())) {
+            oikeitaVastauksia++;
+            return true;
+        }  else {
+            return false;
+        }
+
+    }
+    
     public int getOikeidenVastaustenLkm() {
         return oikeitaVastauksia;
     }

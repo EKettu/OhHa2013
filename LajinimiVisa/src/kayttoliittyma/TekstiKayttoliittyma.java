@@ -60,7 +60,7 @@ public class TekstiKayttoliittyma {
                 visa = new NimiVisa(hallinta);
                 System.out.println("Visa alkaa!" + "\n");
                 while (jatketaankoVisaa) {
-                    System.out.println("ppaaa");
+                   
                     visa.arvoLajit();
                     uusiVisaKayntiin();
                     jatketaankoVisaa();
@@ -75,7 +75,7 @@ public class TekstiKayttoliittyma {
     }
 
     public void uusiVisaKayntiin() {
-        System.out.println("uusi visa toimii");
+        
         System.out.println(hallinta.getKysyttavanLajinSuomiNimi());
         System.out.println("");
         System.out.println(hallinta.getKaikkiVaihtoehdot());

@@ -1,7 +1,7 @@
 AihemŠŠrittely (OhHa2013)
 Aihe: Elišiden tieteellisten nimien opettelu
 Ohjelma, jonka avulla opiskelija voi testata eri elišryhmien tieteellisten nimien osaamistaan. Ohjelma lukee tiedostoa, jossa tietyn elišryhmŠn lajien nimiŠ, suomenkielinen nimi ja latinankielinen nimi erotettuna esim. kaksoispisteellŠ samalla rivillŠ. Ohjelma arpoo satunnaisesti jonkin rivin, poimii siitŠ suomenkielisen nimen ja sijoittaa graafiseen kŠyttšliittymŠŠn sen alle lokeroihin (tms.) satunnaisessa jŠrjestyksessŠ oikean tieteellisen nimen ja kolme muuta vŠŠrŠŠ nimivaihtoehtoa, jotka on poimittu samasta tiedostosta. Jos valittu eliš kuuluu sukuun, jossa on useita lajeja, valitsee ohjelma kolme vŠŠrŠŠ tieteellistŠ nimeŠ samaan sukuun kuuluvien nimien joukosta. Samaan sukuun kuuluminen voidaan mŠŠrittŠŠ esimerkiksi niin, ettŠ jos sukunimien neljŠ ensimmŠistŠ kirjainta ovat samat, kuuluvat ne samaan sukuun. (TŠmŠ ei pidŠ paikkaansa, on hyvin samantapaisia sukunimiŠ, jotka eroavat toisistaan vain loppuosaltaan, mutta se ei tŠssŠ nyt haittaa, nimet nŠyttŠvŠt tarpeeksi samoilta kuitenkin.) Tarkoituksena on estŠŠ esimerkiksi tilanne, jossa kysyttŠvŠ eliš on vaikka sieni, joka kuuluu seitikeihin (Cortinarius-suku) ja satunnaisesti valitut vŠŠrŠt nimet ovat jotain ihan muuta sukua, jolloin tehtŠvŠ on liian helppo. Vastauksen jŠlkeen kŠyttŠjŠ nŠkee oikean vastauksen. 
-Ohjelma voi pitŠŠ lukua siitŠ, kuinka monta nimeŠ on kysytty ja kuinka monta mennyt oikein. NŠmŠ luvut opiskelija saa selville lopettaessaan vastaamisen. 
+Ohjelma voi pitŠŠ lukua siitŠ, kuinka monta nimeŠ on kysytty ja kuinka monta mennyt oikein. 
 
 KŠyttŠjŠt: Opiskelija
 
