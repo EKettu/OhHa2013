@@ -13,18 +13,60 @@ import tiedostonKasittely.TiedostonValinta;
  * @author ekettu
  */
 public class NimienHallinta {
-
+    
+    /**
+     * Lukee tiedoston ja tekee siitä listoja, jos se on oikeassa muodossa
+     */
     private TiedostonLukija lukija;
-    private Elio kysyttava;
-    private Map<Integer, Elio> lajienNimet;
+    
+    /**
+     * Eliö, jonka suomenkielinen nimi tulee käyttäjän nähtäväksi 
+     */
+    private Elio kysyttava;   
+    
+    /**
+     * Sisältää aluksi kolmen muun arvottavan "väärän" lajin latinakieliset nimet
+     */
     private List<String> arvottujenLajienLattarit;
+    
+    /**
+     * Sisältää kysyttävän lajin ja kolmen muun lajin latinankieliset nimet satunnaisessa järjestyksessä
+     */
     private List<String> vaihtoehdot;
+    
+    /**
+     * Sisältää kaikkien tiedoston sisältämien lajien latinankieliset nimet
+     */
     private List<String> kaikkiLajienLattarit;
+    
+    /**
+     * Sisältää kysyttävän eliön kanssa samansukuiset lajit, jos niitä on
+     */
     private List<String> samanSukuiset;
+    
+    /**
+     * Sisältää kysyttävän eliön kanssa samalla kirjaimella alkavat lajit, jos niitä on
+     */
     private List<String> samallaKirjaimellaAlkavat;
+    
+    /**
+     * Arpoo kokonaisluvun halutulta väliltä
+     */
     private Arpoja arvonta;
+    
+    /**
+     * Lista, josta kysyttävä eliö poimitaan, alkaen ensimmäisestä
+     */
     private List<Elio> kysyttavatEliot;
+    
+    /**
+     * Kysyttyjen lajien lukumäärä
+     */
     private int kysyttyjenLajienMaara;
+    
+    /**
+     * Kertoo, onko tiedosto luettavissa
+     */
     private boolean onkoTiedostoOikea;
 
     /**
@@ -42,7 +84,7 @@ public class NimienHallinta {
 
         lukija = new TiedostonLukija(new File(tiedostonNimi));
         lukija.jaaRivitOsiin();
-        lajienNimet = lukija.getElioidenNimet();
+
         kaikkiLajienLattarit = lukija.getLatinaNimet();
 
         samanSukuiset = new ArrayList<String>();

@@ -18,9 +18,6 @@ import nimivisa.NimienHallinta;
  */
 public class TapahtumanKuuntelija implements ActionListener {
 
-    private NimienHallinta hallinta;
-    private String valittuTiedosto;
-    private JLabel kysyttyLajinimi;
     private JButton vaihtoehtoA;
     private JButton vaihtoehtoB;
     private JButton vaihtoehtoC;
@@ -31,8 +28,6 @@ public class TapahtumanKuuntelija implements ActionListener {
     /**
      * Alustaa tarvittavat parametrit
      * @param kayttis graafinen käyttöliittymä
-     * @param hallinta NimienHallinta-olio, jota tämä luokka ja Kayttoliittyma käyttävä
-     * @param valittuTiedosto tiedosto, josta lajeja kysellään
      * @param vaihtoehtoA hallinnasta saatavan ensimmäisen vaihtoehdon nappi
      * @param vaihtoehtoB hallinnasta saatavan toisen vaihtoehdon nappi
      * @param vaihtoehtoC hallinnasta saatavan kolmannen vaihtoehdon nappi
@@ -40,16 +35,15 @@ public class TapahtumanKuuntelija implements ActionListener {
      * @param lopetus ohjelman lopetusnappi
      */
 
-    TapahtumanKuuntelija(Kayttoliittyma kayttis, NimienHallinta hallinta, String valittuTiedosto, JButton vaihtoehtoA, JButton vaihtoehtoB, JButton vaihtoehtoC, JButton vaihtoehtoD, JButton lopetus) {
+    TapahtumanKuuntelija(Kayttoliittyma kayttis, JButton vaihtoehtoA, JButton vaihtoehtoB, JButton vaihtoehtoC, JButton vaihtoehtoD, JButton lopetus) {
         this.kayttis = kayttis;
-        this.valittuTiedosto = valittuTiedosto;
         this.vaihtoehtoA = vaihtoehtoA;
         this.vaihtoehtoB = vaihtoehtoB;
         this.vaihtoehtoC = vaihtoehtoC;
         this.vaihtoehtoD = vaihtoehtoD;
         this.lopetus = lopetus;
 
-        this.hallinta = hallinta;
+   
 
     }
 

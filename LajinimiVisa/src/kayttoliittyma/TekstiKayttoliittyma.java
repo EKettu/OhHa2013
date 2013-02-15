@@ -19,13 +19,44 @@ import tiedostonKasittely.TiedostonValinta;
  */
 public class TekstiKayttoliittyma {
 
+    /**
+     * Skanneri, jonka avulla saadaan käyttäjältä haluttu tiedosto ja valinta
+     */
     private Scanner lukija;
+    
+    /**
+     * Käynnistää NimienHallinnan ja kertoo käyttäjän arvauksen oikeellisuuden
+     */
     private NimiVisa visa;
+    
+    /**
+     * Huolehtii kysyttävän lajin valinnasta ja vaihtoehdoista
+     */
     private NimienHallinta hallinta;
+    
+    /**
+     * Tarkistaa, onko valittu tiedosto olemassa
+     */
     private TiedostonValinta valinta;
+    
+    /**
+     * Valitun tiedoston nimi
+     */
     private String valittuTiedosto;
+    
+    /**
+     * Käyttäjän arvaama lajinimi
+     */
     private String valittuVaihtoehto;
+    
+    /**
+     * Kertoo, onko käyttäjä päättänyt lopettaa ohjelman
+     */
     private boolean onkoLopetusValittu;
+    
+    /**
+     * Kertoo, jatkuuko visa
+     */
     private boolean jatketaankoVisaa;
 
     /**

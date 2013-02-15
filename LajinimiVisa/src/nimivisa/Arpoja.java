@@ -13,6 +13,10 @@ import java.util.Random;
 
 public class Arpoja {
     
+    /**
+     * Arpoo satunnaisen luvun
+     */
+    
     private Random arpoja;
     
     /**

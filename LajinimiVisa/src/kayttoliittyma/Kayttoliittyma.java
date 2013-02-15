@@ -158,7 +158,7 @@ public class Kayttoliittyma implements Runnable {
         vaihtoehtoD = new JButton(hallinta.getVaihtoehtoD());
 
         JButton lopetus = new JButton("Lopetus");
-        kuuntelija = new TapahtumanKuuntelija(this, hallinta, valinta, vaihtoehtoA, vaihtoehtoB, vaihtoehtoC, vaihtoehtoD, lopetus);
+        kuuntelija = new TapahtumanKuuntelija(this, vaihtoehtoA, vaihtoehtoB, vaihtoehtoC, vaihtoehtoD, lopetus);
 
         vaihtoehtoA.addActionListener(kuuntelija);
         vaihtoehtoB.addActionListener(kuuntelija);

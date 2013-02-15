@@ -48,7 +48,7 @@ public class TiedostonLukijaTest {
     public void tiedostonLukijaLuoElionJaSuomiNimiOikein() {
 
         lukija.jaaRivitOsiin();
-        elio = lukija.getElioidenNimet().get(0);
+        elio = lukija.getTiedostonEliot().get(0);
         assertEquals(elio.getSuominimi(), lukija.getSuomiNimet().get(0));
 
     }
@@ -57,7 +57,7 @@ public class TiedostonLukijaTest {
     public void tiedostonLukijaLuoElionJaLattariOikein() {
 
         lukija.jaaRivitOsiin();
-        elio = lukija.getElioidenNimet().get(0);
+        elio = lukija.getTiedostonEliot().get(0);
         assertEquals(elio.getLattari(), lukija.getLatinaNimet().get(0));
 
     }

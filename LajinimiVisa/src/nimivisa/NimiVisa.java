@@ -14,10 +14,20 @@ import tiedostonKasittely.TiedostonValinta;
 
 public class NimiVisa {
 
-  
+     /**
+     * Huolehtii kysyttävän lajin valinnasta ja vaihtoehdoista
+     */
     private NimienHallinta hallinta;
+    
+    /**
+     * Kysyttävä eliö, saadaan NimienHallinnalta
+     */
     Elio kysytty;
-    private boolean totta;
+    
+    /**
+     * Oikeiden vastauksien lukumäärä
+     */
+
     private int oikeitaVastauksia;
 
     /**
@@ -27,7 +37,6 @@ public class NimiVisa {
     public NimiVisa(NimienHallinta hallinta) {
 
         this.hallinta = hallinta;
-        totta = true;
         oikeitaVastauksia = 0;
 
 

@@ -23,3 +23,4 @@ Tuntikirjanpito
 10.2.2013: koodikatselmuksen kommenttien kokoaminen ja lähetys (noin 0,5h)
 11.2.2013: noin 1h paljalla askartelua graafisen käyttöliittymän ja siihen liittyvien muiden luokkien kanssa, noin 0,5 kotona jatkoa
 12.2.2013: noin 2h pajassa (graafiseen käyttöliittymään liittyvät jutut), noin 1,5h ohjelmointia ja sekvenssi- ja luokkakaavioiden tekoa
+15.2.2013: noin 1h koodin JavaDocin kirjoitusta ja koodin siivousta (turhia muuttujia ja metodeja pois)

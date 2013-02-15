@@ -15,13 +15,33 @@ import java.util.logging.Logger;
  */
 public class TiedostonLukija {
 
+    /**
+     * Tiedosto, jota luetaan
+     */
     private File nimiTiedosto;
-    private int rivimaara;
+    /**
+     * Elio, johon tiedostosta saadut nimet talletetaan
+     */
     private Elio elio;
-    private Map<Integer, Elio> elioidenNimet;
+    
+    /**
+     * Sisältää kaikki tiedoston eliöt
+     */
     private List<Elio> tiedostonEliot;
+    
+    /**
+     * Sisältää tiedoston eliöiden suomenkieliset nimet
+     */
     private List<String> suomiNimet;
+    
+    /**
+     * Sisältää tiedoston eliöiden latinankieliset nimet
+     */
     private ArrayList<String> latinaNimet;
+    
+    /**
+     * Kertoo, onko tiedoston muoto oikea
+     */
     private boolean onkoTiedostonMuotoOikea;
 
     /**
@@ -32,11 +52,9 @@ public class TiedostonLukija {
     public TiedostonLukija(File nimiTiedosto) {
         this.nimiTiedosto = nimiTiedosto;
         elio = new Elio("", "");
-        elioidenNimet = new HashMap<Integer, Elio>();
         tiedostonEliot = new ArrayList<Elio>();
         suomiNimet = new ArrayList<String>();
         latinaNimet = new ArrayList<String>();
-        rivimaara = 0;
         onkoTiedostonMuotoOikea = true;
 
     }
@@ -72,10 +90,8 @@ public class TiedostonLukija {
                 onkoTiedostonMuotoOikea = true;
                 elio = new Elio(osat[0], osat[1]);
                 tiedostonEliot.add(elio);
-                elioidenNimet.put(rivimaara, elio);
                 suomiNimet.add(osat[0]);
                 latinaNimet.add(osat[1]);
-                rivimaara++;
                 
             }
         }
@@ -91,9 +107,6 @@ public class TiedostonLukija {
         return tiedostonEliot;
     }
 
-    public Map<Integer, Elio> getElioidenNimet() {
-        return elioidenNimet;
-    }
 
     public List<String> getSuomiNimet() {
         return suomiNimet;
@@ -103,7 +116,4 @@ public class TiedostonLukija {
         return (List<String>) latinaNimet.clone();
     }
 
-    public int getRiviLkm() {
-        return rivimaara;
-    }
 }
