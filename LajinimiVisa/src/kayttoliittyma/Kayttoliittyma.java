@@ -90,6 +90,11 @@ public class Kayttoliittyma implements Runnable {
      * NimienHallinnasta saadun neljännen lattarivaihtoehdon nappi
      */
     private JButton vaihtoehtoD;
+    
+    /**
+     * Kuinka monta prosenttia vastauksista meni oikein.
+     */
+    private double onnistumisprosentti;
 
     
     @Override
@@ -106,6 +111,7 @@ public class Kayttoliittyma implements Runnable {
         
         if (hallinta.onkoTiedostoLuettavissa()) {
         vastausmaara = 0;
+       onnistumisprosentti = 0;
         visa = new NimiVisa(hallinta);
         visa.arvoLajit();
   
@@ -146,12 +152,7 @@ public class Kayttoliittyma implements Runnable {
         container.add(kysyttavaLaji);
         container.add(tyhjaTila2);
 
-        JPanel paneeli = new JPanel(new GridLayout(5, 1));
-        
-//       paneeli.add(tyhjaTila);
-//        paneeli.add(kysyttavaLaji);
-//   //     paneeli.add(tyhjaTila2);
-
+        JPanel paneeli = new JPanel(new GridLayout(8, 1));
         vaihtoehtoA = new JButton(hallinta.getVaihtoehtoA());
         vaihtoehtoB = new JButton(hallinta.getVaihtoehtoB());
         vaihtoehtoC = new JButton(hallinta.getVaihtoehtoC());
@@ -193,6 +194,7 @@ public class Kayttoliittyma implements Runnable {
         vastausOikein = visa.valittiinkoOikeaVaihtoehtoGraafinen(vaihtoehto);
 
         vastausmaara++;
+   //      onnistumisprosentti = 1.0* ((visa.getOikeidenVastaustenLkm()/vastausmaara)*100);
         vastaus.setText(vastausTeksti());
         vastausTilasto.setText(vastausMaaraTeksti());
         paivita();
@@ -210,9 +212,9 @@ public class Kayttoliittyma implements Runnable {
         }
 
         if (vastausOikein) {
-            vastausTeksti = "Oikein!";
+            vastausTeksti = "     Oikein!";
         } else {
-            vastausTeksti = "Väärin!";
+            vastausTeksti = "     Väärin! Oikea vastaus on: " + hallinta.getKysyttavanLajinLattari();
         }
 
 
@@ -226,7 +228,7 @@ public class Kayttoliittyma implements Runnable {
 
     public String vastausMaaraTeksti() {
 
-        return "Oikeita vastauksia: " + visa.getOikeidenVastaustenLkm() + "/" + vastausmaara;
+        return "     Oikeita vastauksia: " + visa.getOikeidenVastaustenLkm() + "/" + vastausmaara;
 
     }
 
@@ -234,7 +236,51 @@ public class Kayttoliittyma implements Runnable {
      * Lopettaa ohjelman suorituksen
      */
     public void ohjelmanLopetus() {
+        onnistumisprosentti = Math.ceil(((1.0*visa.getOikeidenVastaustenLkm())/(1.0*vastausmaara))*100.0);
+        JOptionPane.showMessageDialog(null, "Sait oikein " + onnistumisprosentti + " prosenttia vastauksista." + "\n" + annaTulosTeksti());
         System.exit(0);
+    }
+    
+    /*'
+     * Palauttaa tulostekstin, joka vaihtelee sen mukaan, miten hyvin käyttäjä pärjäsi visassa
+     */
+    
+    public String annaTulosTeksti() {
+        String tulosteksti = "";
+        
+        if (onnistumisprosentti <= 10.0) {
+            tulosteksti += "Tosi surkeaa...";
+        }
+        else if (onnistumisprosentti > 10.0 && onnistumisprosentti <= 25.0) {
+            tulosteksti += "Melko säälittävää...";
+        }
+        
+        else if (onnistumisprosentti  >= 25.0 && onnistumisprosentti <= 50.0) {
+            tulosteksti += "Ei mennyt ihan nappiin.";
+        }
+        
+        else if (onnistumisprosentti >= 50.0 && onnistumisprosentti <= 65.0) {
+            tulosteksti += "Ihan ok.";
+        }
+        
+        else if (onnistumisprosentti >= 66.0 && onnistumisprosentti  <= 85.0) {
+            tulosteksti += "Hyvin meni!";
+        }
+        
+        else if (onnistumisprosentti  >= 85.0 && onnistumisprosentti < 100.0) {
+            tulosteksti += "Loistavaa!";
+        }
+        
+        else if (onnistumisprosentti ==100.0) {
+            tulosteksti += "Täydellistä!";
+        }
+        
+        return tulosteksti;
+    }
+    
+    
+    private double getOnnistumisprosentti() {
+        return onnistumisprosentti;
     }
     
     /**
@@ -251,6 +297,6 @@ public class Kayttoliittyma implements Runnable {
         vaihtoehtoB.setText(hallinta.getVaihtoehtoB());
         vaihtoehtoC.setText(hallinta.getVaihtoehtoC());
         vaihtoehtoD.setText(hallinta.getVaihtoehtoD());
-        
+         
     }
 }

@@ -45,6 +45,7 @@ public class NimiVisa {
     /*'
      * Käynnistää NimienHallinnassa tapahtuvan kysytyn ja vaihtoehtoisten lajien arvonnan
      * ja selvittää kysytyn lajin.
+     * @see hallinta.kaynnistaNimienArvonta();
      */
     public void arvoLajit() {
 

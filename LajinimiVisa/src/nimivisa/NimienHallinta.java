@@ -76,6 +76,9 @@ public class NimienHallinta {
      *
      * @param tiedostonNimi Tiedosto, jonka sisältämiä nimiä halutaan
      * käsiteltävän
+     * 
+     * 
+     * @see lukija.jaaRivitOsiin();
      */
     public NimienHallinta(String tiedostonNimi) {
 
