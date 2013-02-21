@@ -76,6 +76,9 @@ public class TekstiKayttoliittyma {
      * Käynnistää ja ylläpitää visailua niin kauan kuin käyttäjä haluaa, mikäli 
      * tiedostoa valitessa ei ole valittu lopetusta tai tiedosto ei ole
      * luettavassa muodossa.
+     * @see hallinta.onkoTiedostoLuettavissa();
+     * @see visa.arvoLajit();
+     * @see hallinta.tyhjennaLajiListat();
      */
     public void kaynnista() {
 
@@ -133,6 +136,7 @@ public class TekstiKayttoliittyma {
     /**
      * Kysyy käyttäjältä halutun tiedoston tai lopetusmerkin,
      * selvittää onko tiedosto olemassa
+     * @see valinta.valinnanSelvitys(valittu);
      * 
      */
     public void tiedostonValinta() {

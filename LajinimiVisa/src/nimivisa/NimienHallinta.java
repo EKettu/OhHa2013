@@ -84,12 +84,9 @@ public class NimienHallinta {
 
         kysyttava = new Elio("", "");
         arvonta = new Arpoja();
-
         lukija = new TiedostonLukija(new File(tiedostonNimi));
         lukija.jaaRivitOsiin();
-
         kaikkiLajienLattarit = lukija.getLatinaNimet();
-
         samanSukuiset = new ArrayList<String>();
         arvottujenLajienLattarit = new ArrayList<String>();
         samallaKirjaimellaAlkavat = new ArrayList<String>();
@@ -241,7 +238,7 @@ public class NimienHallinta {
      * samansukuisia tai samalla kirjaimella alkavia lajeja
      *
      * @return samanSukuiset, jos samansukuisia lajeja on vähintää kolme,
-     * samallaKirjaimellaAlkavat jos niitä on vähintään kolme on tai jos ei ole
+     * samallaKirjaimellaAlkavat, jos niitä on vähintään kolme tai jos ei ole
      * kumpaakaan, niin palautetaan kaikkien lajien latinankieliset nimet
      * sisältävä lista
      */
@@ -262,6 +259,8 @@ public class NimienHallinta {
      * arvottujenLajienLattarit-lista ei saa kasvaa yli kolmen mittaiseksi eikä
      * se saa sisältää kysyttävää lajia tai jotain toista lajia kahteen kertaan
      * Lopuksi lisätään kolme saatua lajia arvottujenLajienLattarit-listalle
+     * 
+     * @see arvonta.arvoLukuValilta(int x, int y)
      *
      */
     public void arvoMuutKolmeLajia() {

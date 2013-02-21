@@ -4,6 +4,7 @@
  */
 package nimivisa;
 
+import elio.Elio;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -57,4 +58,52 @@ public class NimiVisaTest {
 //       }
 //
 //    }
+    
+    @Test
+    public void metodiOnkoKysyttyLajiTiedostonViimeinenPalauttaaTrueJosOn() {
+        
+        Elio kysytty = hallinta.getKysyttavaLaji();  
+        if (kysytty.equals(hallinta.getKysyttavatEliotLista().get(hallinta.getKysyttavatEliotLista().size()-1))) {   
+        assertEquals(true, visa.onkoKysyttyLajiTiedostonViimeinen());
+        }
+        
+    }
+
+
+    @Test
+    public void metodiOnkoKysyttyLajiTiedostonViimeinenPalauttaaFalseJosEi() {
+        
+        Elio kysytty = hallinta.getKysyttavaLaji();  
+        if (!kysytty.equals(hallinta.getKysyttavatEliotLista().get(hallinta.getKysyttavatEliotLista().size()-1))) {       
+        assertEquals(false, visa.onkoKysyttyLajiTiedostonViimeinen());
+        }
+        
+    }
+    
+    
+        @Test
+    public void metodiValittiinkoOikeaVaihtoehtoGraafinenPalauttaaTrueOikein() {
+        
+       String vaihtoehto = "Cortinarius mucosus";
+       
+       if (vaihtoehto.equals(hallinta.getKysyttavanLajinLattari())) {
+           assertEquals(true, visa.valittiinkoOikeaVaihtoehto(vaihtoehto));
+       }
+        
+    }
+        
+                @Test
+    public void metodiValittiinkoOikeaVaihtoehtoGraafinenPalauttaaFalseOikein() {
+        
+       String vaihtoehto = "Cortinarius mucosus";
+       
+       if (!vaihtoehto.equals(hallinta.getKysyttavanLajinLattari())) {
+           assertEquals(false, visa.valittiinkoOikeaVaihtoehto(vaihtoehto));
+       }
+        
+    }
+    
+ 
 }
+
+

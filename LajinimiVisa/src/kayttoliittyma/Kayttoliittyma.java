@@ -18,7 +18,8 @@ import nimivisa.NimiVisa;
 import nimivisa.NimienHallinta;
 
 /**
- * Luo ohjelman ulkoasun sekä valikot ja painikkeet, joiden avulla ohjelma kommunikoi käyttäjän kanssa
+ * Luo ohjelman ulkoasun sekä valikot ja painikkeet, joiden avulla ohjelma
+ * kommunikoi käyttäjän kanssa
  *
  * @author ekettu
  */
@@ -28,51 +29,46 @@ public class Kayttoliittyma implements Runnable {
      * Kehys ohjelman nappuloille yms.
      */
     private JFrame frame;
-    
     /**
      * Visan kaynnistyksestä huolehtiva olio
      */
     private NimiVisa visa;
-    
     /**
      * Huolehtii eliöiden nimistä;
      */
     private NimienHallinta hallinta;
-    
     /**
      * Valittava tiedostonimi
      */
     private String valinta;
-   
     /**
-     * Kertoo, mitä tehdä jos mitäkin nappia klikattu 
+     * Kertoo, mitä tehdä jos mitäkin nappia klikattu
      */
     private TapahtumanKuuntelija kuuntelija;
-    
     /**
      * Kertoo, onko käyttäjältä saatu vastaus oikein vai väärin
      */
     private boolean vastausOikein;
-    
     /**
      * Montako lajia kysytty yhteensä
      */
     private int vastausmaara;
-    
     /**
      * Vastauksen oikeellisuuden tai vääryyden graafinen esitys
      */
     private JLabel vastaus;
-    
     /**
      * Vastausten määrän graafinen esitys
      */
     private JLabel vastausTilasto;
-    
     /**
      * eliön suominimi, jolle pitäisi löytää oikea lattari
      */
     private JLabel kysyttavaLaji;
+    /**
+     * Tähän tulee tekstiä, jos on käyty kaikki tiedoston eliöt läpi
+     */
+    private JLabel vikalajiteksti;
     /**
      * NimienHallinnasta saadun ensimmäisen lattarivaihtoehdon nappi
      */
@@ -85,18 +81,15 @@ public class Kayttoliittyma implements Runnable {
      * NimienHallinnasta saadun kolmannen lattarivaihtoehdon nappi
      */
     private JButton vaihtoehtoC;
-    
     /**
      * NimienHallinnasta saadun neljännen lattarivaihtoehdon nappi
      */
     private JButton vaihtoehtoD;
-    
     /**
      * Kuinka monta prosenttia vastauksista meni oikein.
      */
     private double onnistumisprosentti;
 
-    
     @Override
     public void run() {
         Object[] tiedostoVaihtoehdot = {"sienet.txt", "linnut.txt", "kasvit.txt", "epamaarainenTestiTiedosto"};
@@ -106,28 +99,27 @@ public class Kayttoliittyma implements Runnable {
             System.exit(0);
         }
 
-        
+
         hallinta = new NimienHallinta(valinta);
-        
+
         if (hallinta.onkoTiedostoLuettavissa()) {
-        vastausmaara = 0;
-       onnistumisprosentti = 0;
-        visa = new NimiVisa(hallinta);
-        visa.arvoLajit();
-  
-        frame = new JFrame("LajinimiVisa");
-        frame.setPreferredSize(new Dimension(400, 700));
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+            vastausmaara = 0;
+            onnistumisprosentti = 0;
+            visa = new NimiVisa(hallinta);
+            visa.arvoLajit();
 
-        luoKomponentit(frame.getContentPane());
+            frame = new JFrame("LajinimiVisa");
+            frame.setPreferredSize(new Dimension(400, 700));
+            frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-       paivita();
+            luoKomponentit(frame.getContentPane());
 
-        frame.pack();
-        frame.setVisible(true);
+            paivita();
 
-        }
-        else {
+            frame.pack();
+            frame.setVisible(true);
+
+        } else {
             JOptionPane.showMessageDialog(null, "Tiedosto ei ole luettavissa");
             System.exit(0);
         }
@@ -135,12 +127,13 @@ public class Kayttoliittyma implements Runnable {
 
 
     }
-    
+
     /**
      * Luo graafiset komponentit
-     * @param container "säiliö", jonne erilaiset nappulat ja tekstialueet sijoitetaan
+     *
+     * @param container "säiliö", jonne erilaiset nappulat ja tekstialueet
+     * sijoitetaan
      */
-
     private void luoKomponentit(Container container) {
         JLabel tyhjaTila = new JLabel("\n");
         kysyttavaLaji = new JLabel(hallinta.getKysyttavanLajinSuomiNimi());
@@ -152,7 +145,7 @@ public class Kayttoliittyma implements Runnable {
         container.add(kysyttavaLaji);
         container.add(tyhjaTila2);
 
-        JPanel paneeli = new JPanel(new GridLayout(8, 1));
+        JPanel paneeli = new JPanel(new GridLayout(9, 1));
         vaihtoehtoA = new JButton(hallinta.getVaihtoehtoA());
         vaihtoehtoB = new JButton(hallinta.getVaihtoehtoB());
         vaihtoehtoC = new JButton(hallinta.getVaihtoehtoC());
@@ -169,6 +162,7 @@ public class Kayttoliittyma implements Runnable {
 
         vastaus = new JLabel(vastausTeksti());
         vastausTilasto = new JLabel(vastausMaaraTeksti());
+        vikalajiteksti = new JLabel("");
 
         paneeli.add(vaihtoehtoA);
         paneeli.add(vaihtoehtoB);
@@ -177,6 +171,7 @@ public class Kayttoliittyma implements Runnable {
         paneeli.add(lopetus);
         paneeli.add(vastaus);
         paneeli.add(vastausTilasto);
+        paneeli.add(vikalajiteksti);
 
         container.add(paneeli);
 
@@ -184,25 +179,37 @@ public class Kayttoliittyma implements Runnable {
     }
 
     /**
-     * Selvittää NimiVisa-luokan kautta onko valittu vaihtoehto oikea, kasvattaa vastausmäärää, sekä päivittää vastaus-
-     * ja vastausTilasto-olioiden tekstit
+     * Selvittää NimiVisa-luokan kautta onko kysytty laji tiedoston viimeinen ja onko valittu vaihtoehto oikea, kasvattaa
+     * vastausmäärää, sekä päivittää vastaus- ja vastausTilasto-olioiden tekstit
      *
      * @param vaihtoehto käyttäjän valitsema vaihtoehto
+     * @see visa.onkoKysyttyLajiTiedostonViimeinen()
+     * @see visa.valittiinkoOikeaVaihtoehtoGraafinen(vaihtoehto)
      */
     public void vastauksenSelvitys(String vaihtoehto) {
-     
-        vastausOikein = visa.valittiinkoOikeaVaihtoehtoGraafinen(vaihtoehto);
-
-        vastausmaara++;
-   //      onnistumisprosentti = 1.0* ((visa.getOikeidenVastaustenLkm()/vastausmaara)*100);
-        vastaus.setText(vastausTeksti());
-        vastausTilasto.setText(vastausMaaraTeksti());
-        paivita();
+        if (visa.onkoKysyttyLajiTiedostonViimeinen()) {
+            vastausOikein = visa.valittiinkoOikeaVaihtoehtoGraafinen(vaihtoehto);
+            vastausmaara++;
+            vastaus.setText(vastausTeksti());
+            vastausTilasto.setText(vastausMaaraTeksti());
+            vikalajiteksti.setText("Valitsemassasi tiedostossa ei ole enempää kysyttäviä eliöitä.");
+            paivitaJosLajiVika();
+            ohjelmanLopetus();
+        } else {
+            vastausOikein = visa.valittiinkoOikeaVaihtoehtoGraafinen(vaihtoehto);
+            vastausmaara++;
+            vastaus.setText(vastausTeksti());
+            vastausTilasto.setText(vastausMaaraTeksti());
+            paivita();
+        }
     }
 
     /**
-     * Palauttaa käyttäjän nähtäväksi tiedon siitä, menikö vastaus oikein vai ei. 
-     * @return vastausTeksti, jonka muoto riippuu siitä, vastasiko käyttäjä oikein vai väärin
+     * Palauttaa käyttäjän nähtäväksi tiedon siitä, menikö vastaus oikein vai
+     * ei.
+     *
+     * @return vastausTeksti, jonka muoto riippuu siitä, vastasiko käyttäjä
+     * oikein vai väärin
      */
     public String vastausTeksti() {
         String vastausTeksti = "";
@@ -220,12 +227,13 @@ public class Kayttoliittyma implements Runnable {
 
         return vastausTeksti;
     }
-    
+
     /**
-     * Palauttaa sanallisen esityksen siitä, kuinka monta lajia on kysytty ja kuinka monta mennyt oikein
+     * Palauttaa sanallisen esityksen siitä, kuinka monta lajia on kysytty ja
+     * kuinka monta mennyt oikein
+     *
      * @return merkkijono, joka kertoo montako monestako lajista on oikein
      */
-
     public String vastausMaaraTeksti() {
 
         return "     Oikeita vastauksia: " + visa.getOikeidenVastaustenLkm() + "/" + vastausmaara;
@@ -233,62 +241,49 @@ public class Kayttoliittyma implements Runnable {
     }
 
     /**
-     * Lopettaa ohjelman suorituksen
+     * Kertoo onnistumisprosentin ja lopettaa ohjelman suorituksen
      */
     public void ohjelmanLopetus() {
-        onnistumisprosentti = Math.ceil(((1.0*visa.getOikeidenVastaustenLkm())/(1.0*vastausmaara))*100.0);
+        onnistumisprosentti = Math.ceil(((1.0 * visa.getOikeidenVastaustenLkm()) / (1.0 * vastausmaara)) * 100.0);
         JOptionPane.showMessageDialog(null, "Sait oikein " + onnistumisprosentti + " prosenttia vastauksista." + "\n" + annaTulosTeksti());
         System.exit(0);
     }
-    
-    /*'
+
+    /**
      * Palauttaa tulostekstin, joka vaihtelee sen mukaan, miten hyvin käyttäjä pärjäsi visassa
      */
-    
     public String annaTulosTeksti() {
         String tulosteksti = "";
-        
+
         if (onnistumisprosentti <= 10.0) {
             tulosteksti += "Tosi surkeaa...";
-        }
-        else if (onnistumisprosentti > 10.0 && onnistumisprosentti <= 25.0) {
+        } else if (onnistumisprosentti > 10.0 && onnistumisprosentti <= 25.0) {
             tulosteksti += "Melko säälittävää...";
-        }
-        
-        else if (onnistumisprosentti  >= 25.0 && onnistumisprosentti <= 50.0) {
+        } else if (onnistumisprosentti >= 25.0 && onnistumisprosentti <= 50.0) {
             tulosteksti += "Ei mennyt ihan nappiin.";
-        }
-        
-        else if (onnistumisprosentti >= 50.0 && onnistumisprosentti <= 65.0) {
+        } else if (onnistumisprosentti >= 50.0 && onnistumisprosentti <= 65.0) {
             tulosteksti += "Ihan ok.";
-        }
-        
-        else if (onnistumisprosentti >= 66.0 && onnistumisprosentti  <= 85.0) {
+        } else if (onnistumisprosentti >= 66.0 && onnistumisprosentti <= 85.0) {
             tulosteksti += "Hyvin meni!";
-        }
-        
-        else if (onnistumisprosentti  >= 85.0 && onnistumisprosentti < 100.0) {
+        } else if (onnistumisprosentti >= 85.0 && onnistumisprosentti < 100.0) {
             tulosteksti += "Loistavaa!";
-        }
-        
-        else if (onnistumisprosentti ==100.0) {
+        } else if (onnistumisprosentti == 100.0) {
             tulosteksti += "Täydellistä!";
         }
-        
+
         return tulosteksti;
     }
-    
-    
+
     private double getOnnistumisprosentti() {
         return onnistumisprosentti;
     }
-    
-    /**
-     * Tyhjentää lajilistat, arpoo uudet lajit, sekä kirjoittaa uuden kysyttävän lajin ja neljä latinankielistä
-     * vaihtoehtoa
-     */
-    
 
+    /**
+     * Tyhjentää lajilistat, arpoo uudet lajit, sekä kirjoittaa uuden kysyttävän
+     * lajin ja neljä latinankielistä vaihtoehtoa
+     * @see hallinta.tyhjennaLajiListat();
+     * @see visa.arvoLajit();
+     */
     public void paivita() {
         hallinta.tyhjennaLajiListat();
         visa.arvoLajit();
@@ -297,6 +292,17 @@ public class Kayttoliittyma implements Runnable {
         vaihtoehtoB.setText(hallinta.getVaihtoehtoB());
         vaihtoehtoC.setText(hallinta.getVaihtoehtoC());
         vaihtoehtoD.setText(hallinta.getVaihtoehtoD());
-         
+
+    }
+
+    /**
+     * Muuttaa kysytyn lajinimen kohdalle lopetusilmoituksen ja tyhjentää vaihtoehto-nappuloiden tekstit
+     */
+    public void paivitaJosLajiVika() {
+        kysyttavaLaji.setText("Visa loppui!");
+        vaihtoehtoA.setText("");
+        vaihtoehtoB.setText("");
+        vaihtoehtoC.setText("");
+        vaihtoehtoD.setText("");
     }
 }

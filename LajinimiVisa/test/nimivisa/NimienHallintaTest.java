@@ -186,13 +186,5 @@ public class NimienHallintaTest {
         assertEquals(0, hallinta.getVaihtoehdotListanPituus());
     }
         
-//                              @Test
-//    public void kysyttavatEliotListaSekoitetaanToimii() {
-//        List<Elio> alkuperaisetEliotJarjestyksessa = hallinta.getKysyttavatEliotLista();
-//        hallinta.sekoitaKysyttavatEliotLista();
-//        
-//        assertThat(hallinta.getKysyttavatEliotLista(), not(alkuperaisetEliotJarjestyksessa));
-//    }
-   
 }
 

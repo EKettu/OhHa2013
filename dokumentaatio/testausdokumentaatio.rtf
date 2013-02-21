@@ -1,0 +1,18 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1187\cocoasubrtf340
+{\fonttbl\f0\fnil\fcharset0 Cambria;}
+{\colortbl;\red255\green255\blue255;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\deftab1304
+\pard\pardeftab1304\ri-612
+
+\f0\fs24 \cf0 Testausdokumentaatio LajinimiVisa-ohjelmalle\
+\
+NimienHallinta-luokassa en oikein voinut testata automaattisesti Arpoja-oliota (Random) k\'e4ytt\'e4m\'e4ll\'e4 luotujen listojen koostumusta. Mutta pyrin testaamaan esimerkiksi sit\'e4, ett\'e4 metodien getLajienLattarit() ja getVaihtoehdot() palauttamat listat eiv\'e4t olisi samanlaisia ja ett\'e4 niiden pituus olisi oikein. NimienHallintaTest-luokassa testi vaihtoehdotListallaLajitEriJarjestyksessaKuinLajienLattaritListalla() on hieman ongelmallinen, koska vaikka se menee useimmiten l\'e4pi, k\'e4y v\'e4lill\'e4 niin, ett\'e4 sattumalta getLajienLattarit() ja getVaihtoehdot() -listat ovat identtiset. T\'e4m\'e4 johtuu getVaihtoehdot() \'96listan satunnaisesta sekoittamisesta, v\'e4lill\'e4 listojen j\'e4rjestys menee sattumalta samaksi. Mielest\'e4ni t\'e4m\'e4 ei kuitenkaan ole suuri ongelma, enk\'e4 keksi miten sen voisi v\'e4ltt\'e4\'e4. \
+\
+NimiVisaTest-luokassa testi metodiValittiinkoOikeaVaihtoehtoPalauttaaTrueJosOikeaVaihtoehtoValittu() ei useimmiten mene l\'e4pi, mutta v\'e4lill\'e4 se menee. T\'e4m\'e4kin liittyy ilmeisesti satunnaistamiseen, mutta en ihan ymm\'e4rr\'e4, miksi homma ei toimi. \
+\
+Pyrin testaamaan arpomisesta riippuvaisia metodeja aina v\'e4lill\'e4 tulosteilla tekstik\'e4ytt\'f6liittym\'e4ss\'e4.\
+\
+Bugit:\
+Ohjelmassa on (ainakin) yksi selke\'e4 bugi graafisen k\'e4ytt\'f6liittym\'e4n kanssa. Jos k\'e4ytt\'e4j\'e4 pelaa Visaa niin kauan, ett\'e4 koko tiedosto tulee k\'e4yty\'e4 l\'e4pi, ohjelma kyll\'e4 ilmoittaa, ett\'e4 lajit loppuivat, mutta se tekee sen hieman liian aikaisin. En saanut ohjelmaa toimimaan niin, ett\'e4 se antaisi k\'e4ytt\'e4j\'e4n vastata viel\'e4 viimeisen lajin kohdalla kysymykseen, vaan ohjelma hypp\'e4\'e4 toisiksi viimeisen j\'e4lkeen lopetus-tilanteeseen.  T\'e4m\'e4 ei ehk\'e4 sin\'e4ns\'e4 ole valtavan suuri ongelma, sill\'e4 ohjelma arpoo aina k\'e4ynnistett\'e4ess\'e4 uuden j\'e4rjestyksen ja toisella pelikerralla kysym\'e4tt\'e4 j\'e4\'e4nyt laji on todenn\'e4k\'f6isesti mukana visassa. Mutta hiukan kuitenkin h\'e4iritsev\'e4 juttu. \
+}

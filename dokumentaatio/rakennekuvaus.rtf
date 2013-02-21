@@ -1,0 +1,15 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1187\cocoasubrtf340
+{\fonttbl\f0\fnil\fcharset0 Cambria;}
+{\colortbl;\red255\green255\blue255;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\deftab1304
+\pard\pardeftab1304\ri-612
+
+\f0\fs24 \cf0 LajinimiVisa Rakennekuvaus (graafiselle k\'e4ytt\'f6liittym\'e4lle)\
+\
+Ohjelman k\'e4ynnist\'e4minen tapahtuu Main-luokasta, joka luo uuden Kayttoliittyma-luokan.  Kayttoliittyma tuntee luokat NimiVisa ja NimienHallinta. Lis\'e4ksi Kayttoliittyma ja TapahtumanKuuntelija tuntevat toisensa, koska Tapahtumankuuntelijan t\'e4ytyy kertoa Kayttoliittymalle, mit\'e4 nappia k\'e4ytt\'e4j\'e4 on painanut. NimiVisa tuntee NimienHallinnan ja sen teht\'e4v\'e4n\'e4 on selvitt\'e4\'e4, onko k\'e4ytt\'e4j\'e4n valitsema vaihtoehto oikea ja onko p\'e4\'e4sty tiedostosta poimitun lajinimilistan viimeiseen kysytt\'e4v\'e4\'e4n lajiin. \
+\
+NimienHallinta tuntee Arpoja-luokan, joka arpoo satunnaisen kokonaisluvun tietylt\'e4 lukuv\'e4lilt\'e4. Arpoja-luokka ei tunne muita luokkia NimienHallinta my\'f6s tuntee Elio-luokan, jonka eli\'f6ll\'e4 on aina suomenkielinen ja latinankielinen nimi. NimienHallinta luo uuden kysytt\'e4v\'e4n Elion ja asettaa sen arvoksi tuntemaltaan TiedostonLukija-luokalta saamansa Elio-listan ensimm\'e4isen eli\'f6n kunhan lista on ensin sekoitettu. TiedostonLukija-luokka ei tunne muita luokkia.\
+\
+Tekstipohjaisen k\'e4ytt\'f6liittym\'e4n kanssa perusrakenne on muuten sama, mutta TekstiKayttoliittyma-luokka tuntee NimienHallinnan ja NimiVisan lis\'e4ksi TiedostonValinta-luokan, jonka teht\'e4v\'e4 on varmistaa, ett\'e4 k\'e4ytt\'e4j\'e4n valitsema tiedosto on olemassa. My\'f6s Main-luokka tuntee TiedostonValinnan, jonka TekstiKayttoliittyma saa konstruktorin parametrina. TiedostonValinta-luokka ei tunne muita luokkia.\
+}

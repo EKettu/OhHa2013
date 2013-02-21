@@ -10,7 +10,8 @@ import tiedostonKasittely.TiedostonValinta;
 
 public class Main {
 
-    /**   
+    /**
+     * Luo uuden Käyttöliitymän ja käynnistää ohjelman
      * @param args the command line arguments
      */
     public static void main(String[] args) throws FileNotFoundException {
