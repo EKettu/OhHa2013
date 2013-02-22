@@ -7,6 +7,8 @@ package kayttoliittyma;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.io.File;
+import java.util.ArrayList;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -92,8 +94,8 @@ public class Kayttoliittyma implements Runnable {
 
     @Override
     public void run() {
-        Object[] tiedostoVaihtoehdot = {"sienet.txt", "linnut.txt", "kasvit.txt", "epamaarainenTestiTiedosto"};
-        valinta = (String) JOptionPane.showInputDialog(null, "Valitse tiedosto", "LajiNimiVisa", JOptionPane.PLAIN_MESSAGE, null, tiedostoVaihtoehdot, tiedostoVaihtoehdot[0]);
+        listaaKansionTekstitiedostot();
+        valinta = (String) JOptionPane.showInputDialog(null, "Valitse tiedosto", "LajiNimiVisa", JOptionPane.PLAIN_MESSAGE, null, listaaKansionTekstitiedostot(), listaaKansionTekstitiedostot()[0]);
         if (valinta == null) {
             JOptionPane.showMessageDialog(null, "Et valinnut tiedostoa, lopetetaan.");
             System.exit(0);
@@ -129,7 +131,36 @@ public class Kayttoliittyma implements Runnable {
     }
 
     /**
-     * Luo graafiset komponentit
+     * Tekee listan niistä .txt tai .TXT -pääteisistä tiedostoista, jotka
+     * sijaitsevat samassa kansiossa kuin ohjelmatiedosto. Lopuksi muuttaa
+     * listan Object-taulukoksi
+     *
+     * @return Object-taulukoksi muutettu lista ohjelman kansiosta löytyvistä
+     * tekstitiedostoista
+     */
+    public Object[] listaaKansionTekstitiedostot() {
+
+        String tiedostopolku = ".";
+        ArrayList<String> tiedostoNimet = new ArrayList();
+        File kansio = new File(tiedostopolku);
+        File[] tiedostolista = kansio.listFiles();
+
+        for (int i = 0; i < tiedostolista.length; i++) {
+            if (tiedostolista[i].getName().endsWith(".txt") || tiedostolista[i].getName().endsWith(".TXT")) {
+                tiedostoNimet.add(tiedostolista[i].getName());
+            }
+        }
+        if (tiedostoNimet.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Ohjelman kansiossa ei valitettavasti ole sopivia tiedostoja.");
+            System.exit(0);
+        }
+        Object[] tiedostoVaihtoehdot = tiedostoNimet.toArray();
+
+        return tiedostoVaihtoehdot;
+    }
+
+    /**
+     * Luo graafiset komponentit, eli nappulat ja tekstikentät
      *
      * @param container "säiliö", jonne erilaiset nappulat ja tekstialueet
      * sijoitetaan
@@ -179,8 +210,9 @@ public class Kayttoliittyma implements Runnable {
     }
 
     /**
-     * Selvittää NimiVisa-luokan kautta onko kysytty laji tiedoston viimeinen ja onko valittu vaihtoehto oikea, kasvattaa
-     * vastausmäärää, sekä päivittää vastaus- ja vastausTilasto-olioiden tekstit
+     * Selvittää NimiVisa-luokan kautta onko kysytty laji tiedoston viimeinen ja
+     * onko valittu vaihtoehto oikea, kasvattaa vastausmäärää, sekä päivittää
+     * vastaus- ja vastausTilasto-olioiden tekstit
      *
      * @param vaihtoehto käyttäjän valitsema vaihtoehto
      * @see visa.onkoKysyttyLajiTiedostonViimeinen()
@@ -241,16 +273,24 @@ public class Kayttoliittyma implements Runnable {
     }
 
     /**
-     * Kertoo onnistumisprosentin ja lopettaa ohjelman suorituksen
+     * Kertoo onnistumisprosentin ja lopettaa ohjelman suorituksen, mikäli
+     * käyttäjä on vastannut kysymyksiin. Jos käyttäjä painaa suoraan
+     * lopetusnappia vastaamatta yhteenkään kysymykseen, ohjelma sulkeutuu.
      */
     public void ohjelmanLopetus() {
-        onnistumisprosentti = Math.ceil(((1.0 * visa.getOikeidenVastaustenLkm()) / (1.0 * vastausmaara)) * 100.0);
-        JOptionPane.showMessageDialog(null, "Sait oikein " + onnistumisprosentti + " prosenttia vastauksista." + "\n" + annaTulosTeksti());
-        System.exit(0);
+        if (vastausmaara != 0) {
+            onnistumisprosentti = Math.ceil(((1.0 * visa.getOikeidenVastaustenLkm()) / (1.0 * vastausmaara)) * 100.0);
+
+            JOptionPane.showMessageDialog(null, "Sait oikein " + onnistumisprosentti + " prosenttia vastauksista." + "\n" + annaTulosTeksti());
+            System.exit(0);
+        } else {
+            System.exit(0);
+        }
     }
 
     /**
-     * Palauttaa tulostekstin, joka vaihtelee sen mukaan, miten hyvin käyttäjä pärjäsi visassa
+     * Palauttaa tulostekstin, joka vaihtelee sen mukaan, miten hyvin käyttäjä
+     * pärjäsi visassa
      */
     public String annaTulosTeksti() {
         String tulosteksti = "";
@@ -281,6 +321,7 @@ public class Kayttoliittyma implements Runnable {
     /**
      * Tyhjentää lajilistat, arpoo uudet lajit, sekä kirjoittaa uuden kysyttävän
      * lajin ja neljä latinankielistä vaihtoehtoa
+     *
      * @see hallinta.tyhjennaLajiListat();
      * @see visa.arvoLajit();
      */
@@ -296,7 +337,8 @@ public class Kayttoliittyma implements Runnable {
     }
 
     /**
-     * Muuttaa kysytyn lajinimen kohdalle lopetusilmoituksen ja tyhjentää vaihtoehto-nappuloiden tekstit
+     * Muuttaa kysytyn lajinimen kohdalle lopetusilmoituksen ja tyhjentää
+     * vaihtoehto-nappuloiden tekstit
      */
     public void paivitaJosLajiVika() {
         kysyttavaLaji.setText("Visa loppui!");

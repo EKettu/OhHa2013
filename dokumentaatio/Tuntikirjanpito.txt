@@ -2,29 +2,61 @@ Tuntikirjanpito
 
 
 15.1.2013: noin 3h (taistelua Gitin kanssa plus Aihemäärittelyn  laatiminen)
+
 17.1.2013: noin 2h ohjelman suunnittelua ja koodauksen aloitusta, noin 2h pajaa
+
 19.1.2013: noin 2h ohjelmointia (NimiVisa-luokka)
+
 21.1.2013: noin 2h ohjelmointia pajalla
+
 22.1.2013: noin 1,5h ohjelmointia pajalla (9 testiä) ja noin 0,5h luokkakaavion tekoa
+
 24.1.2013: noin 1,5h ohjelmointia
+
 25.1.2013: noin 1 h ohjelmointia
+
 26.1.2013: noin 1,5h ohjelmointia (NimiHallinto-luokka vanhan NimiVisa-luokan tilalle ja uusi NimiVisa-luokka)
+
 27.1.2013: noin 1,5h ohjelmointia (miten saadaan ohjelma valitsemaan arvottavat lajit "samansukuisten" tai tarpeeksi samanlaisten nimien listasta)
+
 28.1.2013: 2h ohjelmointia pajalla ja noin 1,5 testien kirjoitusta muuten
+
 29.1.2013: 2h ohjelmointia pajalla (uusi luokka Arpoja), testejä, noin 1h ohjelmointia kotona (ongelma nimien kyselyn kanssa, ohjelma kysyy vain yhtä ja samaa lajia, uuden kysyttävän lajin arpominen ei toimi)
+
 31.1.2013: noin 1h ohjelmointia pajalla (yrityksiä ratkoa eilistä ongelmaa). Noin 1,5h ohjelmointia kotona, uusi tapa hakea kysyttävä laji (kanssakurssilaisen vinkistä), nyt ongelmana enää vaihtoehdot-listan toiminta, kasvaa joka kierroksella ja sisältää samoja lajeja.
+
 1.2.2013: noin 1h ohjelmointia (vaihtoehdot-listan ongelma korjattu (ehkä ei kaikkien taiteen sääntöjen mukaan), nyt ongelmana enää se, että ohjelma poistaa jo kysyttyjen lajien lattarit listasta, josta pitäisi saada vaihtoehtoja uudelle oikealle lajille. 
+
 2.2.2013: noin 1h ohjelmointia (graafisen käyttöliittymän ja tapahtumankuuntelijan perusrunko, eilisen ongelman ihmettelyä)
+
 4.2.2013: noin 1,5h ohjelmointia pajalla (kysyttyjen lajien lattarien poisto -ongelma saatiin ratkaistua, testejä hiukan), noin 0,5 ohjelmointia kotona (koodin siistimistä)
+
 5.2.2013: noin 2h ohjelmointia pajalla (ohjelma tarkistaa, onko tiedosto luettavissa), sekvenssikaavioiden tekoa, noin 1h sekvenssikaavioiden säätöä ja koodausta kotona, ongelmana nyt ohjelman outo jumitus kesken suorituksen
+
 7.2.2013: noin 2h pajaa, jumitusongelma saatiin ratkaistua poistamalla ylimääräinen metodikutsu, graafisen käyttöliittymän ja tapahtumankuuntelijan säätöä
+
 8.2.2013: koodikatselmusta, projektin lataus klo 17.00 (noin 0,5h alustavaa tutustumista)
+
 9.2.2013: koodikatselmusta noin 1,5h, noin 1h graafisen käyttöliittymän pohdintaa
+
 10.2.2013: koodikatselmuksen kommenttien kokoaminen ja lähetys (noin 0,5h)
+
 11.2.2013: noin 1h paljalla askartelua graafisen käyttöliittymän ja siihen liittyvien muiden luokkien kanssa, noin 0,5 kotona jatkoa
+
 12.2.2013: noin 2h pajassa (graafiseen käyttöliittymään liittyvät jutut), noin 1,5h ohjelmointia ja sekvenssi- ja luokkakaavioiden tekoa
+
 15.2.2013: noin 1h koodin JavaDocin kirjoitusta ja koodin siivousta (turhia muuttujia ja metodeja pois)
+
 16.2.2013: Koodikatselmointi 2, projekti ladattu klo 13.40, 1,5 tutustumista arvioitavaan koodiin
+
 17.2.2013: 0,5 koodikatselmointiraportin kirjoitusta ja lähetys
+
 18.2.2013: noin 1h Käyttöliittymään ohjelman lopetuksessa näkyvän tekstin ja onnistumisprosentin laskun ohjelmointia, koodin siivousta
+
 18.2.2013: noin 0,5h pientä korjailua Käyttöliittymässä
+
+19.2.2013: demo pajassa, kotona noin 1h ohjelmointia, uusi metodi lopettamaan ohjelma, jos tiedostosta loppuvat eliöt
+
+21.2.2013: noin 1,5 puuttuvien dokumenttien (käyttöohjeet, testausdokumentaatio, rakennekuvaus) kirjoitusta, javadocin siivousta, pari uutta testiä NimiVisalle, ongelma .jar-tiedoston kanssa
+
+22.2.2013: noin 2h bugien korjausta, .jar-tiedoston säätöä, dokumentaation päivitystä ja yleistä viime hetken korjailua
