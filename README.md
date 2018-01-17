@@ -1,3 +1,3 @@
 OhHa2013
 ========
-Blah blah
+Ohjelmoinnin harjoitustyö -kurssin (kevät 2013) projekti.
